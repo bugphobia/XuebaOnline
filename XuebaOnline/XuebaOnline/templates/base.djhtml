@@ -1,0 +1,16 @@
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'semantic.min.css' %}">
+    <script src="{% static 'semantic.min.js' %}"></script>
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+
+    {% block body %}
+    {% endblock %}
+
+  </body>
+</html>

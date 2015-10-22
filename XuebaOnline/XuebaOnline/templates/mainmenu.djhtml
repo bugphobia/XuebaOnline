@@ -1,0 +1,23 @@
+<div class="ui fixed inverted menu">
+  <div class="ui container">
+    <div class="item content">
+      Xueba Online
+    </div>
+    <div class="item">
+      <div class="ui icon input">
+        <input class="prompt" placeholder="tags" type="text">
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui two column very relaxed grid">
+        <div class="column">
+          <button class="ui inverted orange button">register</button>
+        </div>
+        <div class="ui inverted vertical divider"> Or </div>
+        <div class="column">
+          <button class="ui inverted purple button">login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

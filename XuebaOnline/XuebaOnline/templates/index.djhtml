@@ -1,0 +1,8 @@
+{% extends "base.djhtml" %}
+
+{% block title %} index {% endblock %}
+
+{% block body %}
+  {% include 'mainmenu.djhtml' %}
+  
+{% endblock %}
