@@ -6,6 +6,7 @@
     <div class="item">
       <div class="ui icon input">
         <input class="prompt" placeholder="tags" type="text">
+        <i class="search icon"></i>
       </div>
     </div>
     <div class="right item">
