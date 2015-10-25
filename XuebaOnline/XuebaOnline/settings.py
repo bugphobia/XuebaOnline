@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'XuebaOnline',
-    'account',
+    'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
