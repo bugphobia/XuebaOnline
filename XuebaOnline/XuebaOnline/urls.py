@@ -20,4 +20,7 @@ from . import views
 urlpatterns = [
     url(r'^/{0,1}$',views.index),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/$', views.accounts_home),
+    url(r'^accounts/signup/$', views.accounts_signup),
+    url(r'^display/$', views.test_display_meta),
 ]

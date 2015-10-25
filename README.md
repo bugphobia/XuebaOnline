@@ -19,3 +19,14 @@
 
 + `static`下放置静态文件，如CSS、JS脚本、图片素材等
 
+关于account App
+
++ 主要利用该应用来管理数据，不使用该应用下的views
+
++ 所有和用户直接相关的页面放在XuebaOnline/templates/accounts/中
+	- log in 
+	- sign up
+	- user home
+	- ......
+
++ 所以和用户有关的页面的url中有一个片段为/accounts/
