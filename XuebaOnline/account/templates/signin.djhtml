@@ -7,8 +7,11 @@
     body {
     background-color: #DADADA;
     }
-   .cloumn {
+   #main {
      width: 450px;
+   }
+   #page {
+     margin-top: 20px;
    }
   </style>
   <script>
@@ -42,9 +45,8 @@
       });
      });
   </script>
-  <div class="ui middle aligned center aligned grid">
-    <div class="row"></div>
-    <div class="cloumn">
+  <div id ="page" class="ui middle aligned center aligned grid">
+    <div id="main" class="cloumn">
       <h2 class="ui header">
         <i class="ui users icon"></i>
         <div class="content">
@@ -76,7 +78,7 @@
           <div class="header">
             New to us?
           </div>
-          <a href="#">Sign Up</a>
+          <a href="/accounts/signup/">Sign Up</a>
         </div>
       </div>
     </div>

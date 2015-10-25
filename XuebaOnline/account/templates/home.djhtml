@@ -1,4 +1,4 @@
-{% extends "../base.djhtml" %}
+{% extends "base.djhtml" %}
 
 {% block title %} Accounts Home {% endblock %}
 

@@ -7,17 +7,9 @@ def static_page(request,template_name):
 def index(request):
     return HttpResponse(loader.get_template('index.djhtml').render())
 
-def accounts_home(request):
-	return HttpResponse(loader.get_template('accounts/home.djhtml').render())
-
-def accounts_signup(request):
-	return HttpResponse(loader.get_template('accounts/signup.djhtml').render())
-
 def test_display_meta(request):
-	values = request.META.items()
-	html = []
-	for k, v in values:
-		html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
-	return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-
+        values = request.META.items()
+        html = []
+        for k, v in values:
+                html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+        return HttpResponse('<table>%s</table>' % '\n'.join(html))
