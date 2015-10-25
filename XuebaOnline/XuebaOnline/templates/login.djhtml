@@ -1,0 +1,84 @@
+{% extends 'base.djhtml' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+  <style type="text/css">
+    body {
+    background-color: #DADADA;
+    }
+   .cloumn {
+     width: 450px;
+   }
+  </style>
+  <script>
+   $(document) .ready(function(){
+   $('.ui.form')
+      .form({
+        fields: {      
+          username: {
+            identifier: 'username',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a username'
+              }
+            ]
+          },
+          password: {
+            identifier: 'password',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a password'
+              },
+              {
+                type   : 'minLength[6]',
+                prompt : 'Your password must be at least {ruleValue} characters'
+              }
+            ]
+          },
+        }
+      });
+     });
+  </script>
+  <div class="ui middle aligned center aligned grid">
+    <div class="row"></div>
+    <div class="cloumn">
+      <h2 class="ui header">
+        <i class="ui users icon"></i>
+        <div class="content">
+          Login
+          <div class="sub header">XueOnline</div>
+        </div>
+      </h2>
+      <form class="ui large form">
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input name="username" placeholder="your user name" type="text">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input name="password" placeholder="your password" type="password">
+            </div>
+          </div>
+          <div class="ui fluid blue submit button">Login</div>
+        </div>
+        <div class="ui error message"></div>
+      </form>
+      <div class="ui icon message">
+        <i class="add user icon"></i>
+        <div class="content">
+          <div class="header">
+            New to us?
+          </div>
+          <a href="#">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
