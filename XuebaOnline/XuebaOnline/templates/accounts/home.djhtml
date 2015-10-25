@@ -1,0 +1,7 @@
+{% extends "../base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+	<h1>Welcome Home.</h1>
+{% endblock %}

@@ -21,4 +21,7 @@ urlpatterns = [
     url(r'^/{0,1}$',views.static_page,{'template_name':'index.djhtml'}),
     url(r'^login/{0,1}$',views.static_page,{'template_name':'login.djhtml'}),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/$', views.accounts_home),
+    url(r'^accounts/signup/$', views.accounts_signup),
+    url(r'^display/$', views.test_display_meta),
 ]
