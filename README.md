@@ -19,14 +19,14 @@
 
 + `static`下放置静态文件，如CSS、JS脚本、图片素材等
 
-关于account App
+关于accounts App
 
-+ 主要利用该应用来管理数据，不使用该应用下的views
++ 与用户相关的数据和页面都放在该App下 
 
-+ 所有和用户直接相关的页面放在XuebaOnline/templates/accounts/中
-	- log in 
++ 所有和用户直接相关的页面放在accounts/templates/中
+	- sign in 
 	- sign up
 	- user home
 	- ......
 
-+ 所以和用户有关的页面的url中有一个片段为/accounts/
++ 所以程序的运行过程中将获取的url拿到XuebaOnline下的urls.py中寻找，然后通过url(r'^accounts/', include(accounts_urls)),转到accounts下的urls.py中寻找。然后views.py中加载模板时都是从views.py同目录下的templates/文件夹中。
