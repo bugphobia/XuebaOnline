@@ -23,7 +23,12 @@
           <div class="sub header">XuebaOnline</div>
         </div>
       </h2>
-      <form class="ui large form" action="" method="post">
+      {% if errors %}
+        <form class="ui large error form" action="/accounts/signup/" method="post">{% csrf_token %}
+      {% else %}
+          <form class="ui large form" action="/accounts/signup/" method="post">{% csrf_token %}
+      {% endif %}
+      
         <div class="ui stacked segment">
           <div class="field">
             <div class="ui left icon input">
@@ -49,10 +54,17 @@
               <input type="password" name="repassword" placeholder="Confirm The Password">
             </div>
           </div>
-          <div class="ui fluid large green submit button">Create</div>
+          <button class="ui fluid large green submit button" type="submit">Create</button>
         </div>
+        {% if errors %}
+          <div class="ui error message">
+            <div class="header">Sign Up Failed</div>
+            {% for error in form.errors.items %}
+              <p>{{ error|escape }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
       </form>
-      
       <div class="ui message">
         Already have an account? <a href="/accounts/signin/">Log In</a>
       </div>
