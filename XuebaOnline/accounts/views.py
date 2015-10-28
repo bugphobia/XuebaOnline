@@ -30,12 +30,17 @@ def signup(request):
             if password != repassword:
                 errors.append('password and repassword is not same')
             else:
-                user = User.objects.create_user(username=request.POST['username'],
-                                                email=request.POST['email'],
-                                                password=request.POST['password'])
-                user.is_active = True
-                user.save()
-                return redirect(signin,is_new_user=True)
+                if User.objects.filter(username=request.POST['username']) is None: 
+                    user = User.objects.create_user(username=request.POST['username'],
+                                                    email=request.POST['email'],
+                                                    password=request.POST['password'])
+                    user.is_active = True
+                    user.save()
+                    return redirect(signin,is_new_user=True)
+                else:
+                    errors.append('The username have already been used')
+        for error in errors:
+            print(error)
         return render(request,
                       'signup.djhtml',
                       RequestContext(request,{'errors':errors}))
@@ -48,13 +53,13 @@ def signin(request,is_new_user):
         try:
             username = request.POST['username']
             password = request.POST['password']
-            print(username,password)
+            # print(username,password)
         except:
             return render(request,
                           'signin.djhtml',
                           RequestContext(request,{'new':is_new_user,'errormsg':"Missing username or password"}))
         user = authenticate(username=username,password=password)
-        print(user)
+        # print(user)
         if user is not None:
             if user.is_active:
                 login(request, user)
