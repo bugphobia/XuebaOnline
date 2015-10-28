@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<!--Author : Panacea, Last Fixed 2015/10/25-->
+
+<script>
+  function goRegister()
+  {
+    window.location.href="/accounts/signup/";
+  }
+  function goLogout()
+  {
+    window.location.href="/accounts/logout/";
+  }
+</script>
+
+<!--Top Following(Fixed) Menu-->
+<!--Start with "Home Course Questions User registed Or login"-->
+<div class="ui stackable top fixed inverted menu">
+  <div class="ui container">
+    <a class="active item" href='/index/'>
+      Home
+    </a>
+    
+    <a class="item">
+      Course
+    </a>
+    
+    <a class="item">
+      Questions
+    </a>
+    
+    <a class="item">
+      User
+    </a>
+    
+    <div class="right item">
+      <div class="ui two column very relaxed grid">
+
+        <div class="item">
+          <div class="ui left icon">
+            <i class="user icon"></i>
+            <a href="/accounts/">{{ user.username }}</a>
+          </div>
+        </div>
+        
+        <div class="column">
+          <button class="ui inverted blue button" onClick="goLogout()">logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

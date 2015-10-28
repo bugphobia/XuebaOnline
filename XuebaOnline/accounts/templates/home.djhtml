@@ -3,5 +3,19 @@
 {% block title %} Accounts Home {% endblock %}
 
 {% block body %}
-	<h1>Welcome Home.</h1>
+  {% if user %}
+  	<div>
+  	{% include "post_signin_header.djhtml" %}
+	</div>
+	<div>
+	  <h1>Welcome Home, {{ user.username }}.</h1>
+	</div>
+  {% else %}
+  	<div>
+  	{% include "pre_signin_header.djhtml" %}
+  	</div>
+  	<div>
+  	  <h1>Welcome Home.</h1>
+  	</div>
+  {% endif %}
 {% endblock %}

@@ -1,0 +1,25 @@
+  <!--Foot Contents -->
+  <!--URL should be Writted-->
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h3 class="ui inverted header">About Us</h3>
+          <div class="ui inverted link list">
+            <a href="#" class="item">FeedBack</a>
+            <a href="#" class="item">ReadMe</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Connect Us</h4>
+          <div class="ui inverted link list">
+            <a>BugPhoiba</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Copyright</h4>
+          <p>Copyright 2014 Contributors ,Released under the MIT license, sourced from http://opensource.org/licenses/MIT</p>
+        </div>
+      </div>
+    </div>
+  </div>

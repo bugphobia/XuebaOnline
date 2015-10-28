@@ -14,10 +14,9 @@
 
 <!--Top Following(Fixed) Menu-->
 <!--Start with "Home Course Questions User registed Or login"-->
-
 <div class="ui stackable top fixed inverted menu">
   <div class="ui container">
-    <a class="active item">
+    <a class="active item" href='/index/'>
       Home
     </a>
     
@@ -44,6 +43,5 @@
         </div>
       </div>
     </div>
-  
   </div>
 </div>
