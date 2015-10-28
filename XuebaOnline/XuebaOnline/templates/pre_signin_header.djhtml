@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!--Author : Panacea, Last Fixed 2015/10/25-->
+
+<script>
+  function goRegister()
+  {
+    window.location.href="/accounts/signup/";
+  }
+  function goLogin()
+  {
+    window.location.href="/accounts/signin/";
+  }
+</script>
+
+<!--Top Following(Fixed) Menu-->
+<!--Start with "Home Course Questions User registed Or login"-->
+<div class="ui stackable top fixed inverted menu">
+  <div class="ui container">
+    <a class="active item" href='/index/'>
+      Home
+    </a>
+    
+    <a class="item">
+      Course
+    </a>
+    
+    <a class="item">
+      Questions
+    </a>
+    
+    <a class="item">
+      User
+    </a>
+    
+    <div class="right item">
+      <div class="ui two column very relaxed grid">
+        <div class="column">
+          <button class="ui inverted orange button" onClick="goRegister()">register</button>
+        </div>
+        <div class="ui inverted vertical divider"> Or </div>
+        <div class="column">
+          <button class="ui inverted purple button"  onClick="goLogin()">login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

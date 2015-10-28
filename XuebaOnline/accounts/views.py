@@ -1,16 +1,20 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.template import RequestContext, loader
+from django.template import RequestContext, loader, Context
 
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    return HttpResponse(loader.get_template('home.djhtml').render())
+    user = get_user(request)
+    if user is not None:
+        return HttpResponse(loader.get_template('home.djhtml').render(Context({"user": user})))
+    else:
+        return HttpResponse(loader.get_template('home.djhtml').render())
 
 def signup(request):
     if request.method == 'POST':
@@ -75,4 +79,8 @@ def signin(request,is_new_user):
     return render(request,
                   'signin.djhtml',
                   RequestContext(request,{'new':is_new_user}))
+
+def logout_view(request):
+    logout(request)
+    return redirect('/index/')
 

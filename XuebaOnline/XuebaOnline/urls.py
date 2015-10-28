@@ -21,6 +21,7 @@ from accounts import urls as accounts_urls
 
 urlpatterns = [
     url(r'^/{0,1}$',views.static_page,{'template_name':'index.djhtml'}),
+    url(r'^index/$', views.static_page,{'template_name':'index.djhtml'}),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^display/$', views.test_display_meta),
