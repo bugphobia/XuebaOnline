@@ -3,6 +3,9 @@
 {% block title %} index {% endblock %}
 
 {% block body %}
+
   {% include 'mainmenu.djhtml' %}
+  {% include 'contentOfMainPage.djhtml' %}
+  {% include 'footmenu.djhtml' %}
   
 {% endblock %}
