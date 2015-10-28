@@ -14,6 +14,37 @@
      margin-top: 20px;
    }
   </style>
+  <script>
+    $(document) .ready(function(){
+    $('.ui.form')
+      .form({
+        fields: {      
+          username: {
+            identifier: 'username',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a username'
+              }
+            ]
+          },
+          password: {
+            identifier: 'password',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a password'
+              },
+              {
+                type   : 'minLength[6]',
+                prompt : 'Your password must be at least {ruleValue} characters'
+              }
+            ]
+          },
+        }
+      });
+    });
+  </script>
   <div id ="page" class="ui middle aligned center aligned grid">
     <div id="main" class="cloumn">
       <h2 class="ui header">

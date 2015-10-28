@@ -30,3 +30,7 @@
 	- ......
 
 + 所以程序的运行过程中将获取的url拿到XuebaOnline下的urls.py中寻找，然后通过url(r'^accounts/', include(accounts_urls)),转到accounts下的urls.py中寻找。然后views.py中加载模板时都是从views.py同目录下的templates/文件夹中。
+
+关于template路径的问题：
+
++ 注意尽管是在accounts中，如果extends某个模板，比如base.djhtml，引用的还是XuebaOnline下的那个。
