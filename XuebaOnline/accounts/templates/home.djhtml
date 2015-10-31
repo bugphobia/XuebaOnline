@@ -4,23 +4,18 @@
 
 {% block body %}
 
+  <!--Just load for location-->
+  {% include 'mainmenu.djhtml' %}
+  
   {% if user %}
     <div>
     {% include "post_signin_header.djhtml" %}
-  </div>
-  <div>
-    <h1>Welcome Home, {{ user.username }}.</h1>
   </div>
   {% else %}
     <div>
     {% include "pre_signin_header.djhtml" %}
     </div>
-    <div>
-      <h1>Welcome Home.</h1>
-    </div>
   {% endif %}
-
-  {% include 'mainmenu.djhtml' %}
 
   {% load staticfiles %}
 

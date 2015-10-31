@@ -34,7 +34,7 @@ def signup(request):
             if password != repassword:
                 errors.append('password and repassword is not same')
             else:
-                if User.objects.filter(username=request.POST['username']) is None: 
+                if User.objects.filter(username=request.POST['username']).count() is 0: 
                     user = User.objects.create_user(username=request.POST['username'],
                                                     email=request.POST['email'],
                                                     password=request.POST['password'])
@@ -42,6 +42,7 @@ def signup(request):
                     user.save()
                     return redirect(signin,is_new_user=True)
                 else:
+                    print(User.objects.filter(username=request.POST['username']))
                     errors.append('The username have already been used')
         for error in errors:
             print(error)
