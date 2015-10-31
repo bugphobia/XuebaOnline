@@ -14,76 +14,6 @@
      margin-top: 20px;
    }
   </style>
-    <script>
-    $(document) .ready(function(){
-    $('.ui.form')
-      .form({
-        fields: {
-          username: {
-            identifier: 'username',
-            rules: [
-              {
-                type  : 'empty',
-                prompt: 'Please enter a username'
-              },
-              {
-                type  : 'maxLength[30]',
-                prompt: 'Your username must be not more than {ruleValue} characters'
-              }
-            ]
-          },
-          email: {
-            identifier  : 'email',
-            rules: [
-              {
-                type   : 'email',
-                prompt : 'Please enter a valid e-mail'
-              },
-              {
-                type  : 'maxLength[254]',
-                prompt: 'Your email must be not more than {ruleValue} characters'
-              }
-            ]
-          },
-          password: {
-            identifier: 'password',
-            rules: [
-              {
-                type   : 'empty',
-                prompt : 'Please enter a password'
-              },
-              {
-                type   : 'minLength[6]',
-                prompt : 'Your password must be at least {ruleValue} characters'
-              },
-              {
-                type  : 'maxLength[128]',
-                prompt: 'Your username must be not more than {ruleValue} characters'
-              }
-            ]
-          },
-          match: {
-            identifier  : 'repassword',
-            rules: [
-              {
-                type   : 'match[password]',
-                prompt : 'Please put the same value in both fields'
-              }
-            ]
-          },
-          terms: {
-            identifier: 'terms',
-            rules: [
-              {
-                type   : 'checked',
-                prompt : 'You must agree to the terms and conditions'
-              }
-            ]
-          }
-        }
-      });
-    });
-  </script>
   <div id="page" class="ui middle aligned center aligned grid">
     <div id ="main" class="column">
       <h2 class="ui header">
@@ -124,25 +54,14 @@
               <input type="password" name="repassword" placeholder="Confirm The Password">
             </div>
           </div>
-          <div class="inline field">
-            <div class="ui checkbox">
-              <input type="checkbox" name="terms">
-              <label>I agree to the terms and conditions</label>
-            </div>
-          </div>
           <button class="ui fluid large green submit button" type="submit">Create</button>
         </div>
-        
         {% if errors %}
           <div class="ui error message">
             <div class="header">Sign Up Failed</div>
-            {% for error in errors %}
+            {% for error in form.errors.items %}
               <p>{{ error|escape }}</p>
             {% endfor %}
-          </div>
-        {% else %}
-          <div class="ui error message">
-            <p>{{ errormsg }}</p>
           </div>
         {% endif %}
       </form>

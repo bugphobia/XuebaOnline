@@ -1,0 +1,194 @@
+{% load staticfiles %}
+
+<div class="ui segment">
+  <div class="ui five column grid">
+    <div class="two wide column"></div>
+    <div id="ActivityPage" class="twelve wide column">
+      <div class="row">
+        <div class="ui two column equal width grid">
+          <div class="column">
+            <div class="row">
+              <h3 class="ui header" style="margin-top: 0.5em">
+                <i class="user icon"></i>
+                <div class="content">My Activity</div>
+              </h3>
+              <div class="ui large feed">
+                <div class="event">
+                  <div class="label">
+                    <img src="{% static 'SearchLogo.jpg' %}">
+                  </div>
+                  <div class="content">
+                    <div class="summary">
+                      <a class="user">Panacea</a> added you as a friend
+                      <div class="date">17 Hours Ago</div>
+                    </div>
+                    <div class="meta">
+                      <a class="like"> <i class="like icon"></i> 7 Likes </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="event">
+                  <div class="label">
+                    <i class="pencil icon"></i>
+                  </div>
+                  <div class="content">
+                    <div class="summary"> You submitted a new post to the Course of Software Engineering <div class="date"> 3 days ago </div>
+                    </div>
+                    <div class="extra text">
+                      I'm busy editting Scruming Meeting.
+                    </div>
+                    <div class="meta"> <a class="like"> <i class="like icon"></i> 11 Likes </a> </div>
+                  </div>
+                </div>
+
+                <div class="event">
+                  <div class="label">
+                    <img src="{% static 'SearchLogo.jpg' %}">
+                  </div>
+                  <div class="content">
+                    <div class="date">4 days ago</div>
+                    <div class="summary">
+                      <a>Fihezro</a> added <a>1 new illustration</a>
+                    </div>
+                    <div class="extra images">
+                      <a><img src="{% static 'SearchLogo.jpg' %}"></a>
+                    </div>
+                    <div class="meta"> <a class="like"> <i class="like icon"></i> 1 Like </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="row">
+              <div class="row">
+                <h3 class="ui header" style="margin-top: 0.5em">
+                  <i class="university icon"></i>
+                  <div class="content">My Course</div>
+                </h3>
+              </div>
+              <div class="row" style="margin-top: 1em">
+                <table class="ui very basic collapsing celled table">
+                  <thead>
+                    <tr>
+                      <!--Record the "title" column of table-->
+                      <th>Courses</th>
+                      <th>Start Time</th>
+                      <th>Reference</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h4 class="ui image header">
+                          <img src="{% static 'SearchLogo.jpg' %}" class="ui mini rounded image">
+                          <div class="content"> Software Engineering <div class="sub header">PocketPanacea </div> </div>
+                        </h4>
+                      </td>
+
+                      <td>Start From 2015-09-14</td>
+                      <td>URL Of Reference</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <h4 class="ui image header">
+                          <img src="{% static 'SearchLogo.jpg' %}" class="ui mini rounded image">
+                          <div class="content"> Software Engineering <div class="sub header">PocketPanacea </div> </div>
+                        </h4>
+                      </td>
+
+                      <td>Start From 2015-09-14</td>
+                      <td>URL Of Reference</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <h4 class="ui image header">
+                          <img src="{% static 'SearchLogo.jpg' %}" class="ui mini rounded image">
+                          <div class="content"> Software Engineering <div class="sub header">PocketPanacea </div> </div>
+                        </h4>
+                      </td>
+
+                      <td>Start From 2015-09-14</td>
+                      <td>URL Of Reference</td>
+                    </tr>
+
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="ui header" style="margin-top: 0.5em">
+          <i class="help icon"></i>
+          <div class="content">My Questions</div>
+        </h3>
+        <div class="ui two column grid">
+          <div class="row">
+            <div class="eleven wide column">
+              {% include 'question.djhtml' %}
+            </div>
+            <div class="five wide middle aligned center aligned column">
+              <div class="two ui large buttons">
+                <button class="ui blue button" style="margin-right: 0.5em">Edit</button>
+                <div class="or"></div>
+                <button class="ui button" style="margin-left: 0.5em">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="ui header" style="margin-top: 0.5em">
+          <i class="warning icon"></i>
+          <div class="content">My Answers</div>
+        </h3>
+        <div class="ui two column grid">
+          <div class="row">
+            <div class="eleven wide column">
+              {% include 'question.djhtml' %}
+            </div>
+            <div class="five wide middle aligned center aligned column">
+              <div class="two ui large buttons">
+                <button class="ui blue button" style="margin-right: 0.5em">Edit</button>
+                <div class="or"></div>
+                <button class="ui button" style="margin-left: 0.5em">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="ui header" style="margin-top: 0.5em">
+          <i class="at icon"></i>
+          <div class="content">Who @ Me</div>
+        </h3>
+        <div class="ui two column grid">
+          <div class="row">
+            <div class="eleven wide column">
+              {% include 'question.djhtml' %}
+            </div>
+            <div class="five wide middle aligned center aligned column">
+              <div class="two ui large buttons">
+                <button class="ui blue button" style="margin-right: 0.5em">Accept</button>
+                <div class="or"></div>
+                <button class="ui button" style="margin-left: 0.5em">Ignore</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="two wide column"></div>
+  </div>
+</div>

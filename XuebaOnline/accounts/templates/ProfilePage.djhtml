@@ -1,0 +1,250 @@
+{% load staticfiles %}
+
+<!--Page Content Of Profile-->
+<!--User's Photo and Other Information-->
+<div class="ui segment">
+  <div class="ui five column grid">
+   
+    <div class="two wide column"></div>
+    
+    <div class="four wide column">
+      <div id="PictureOfCard" class="ui card">
+        <div class="image">
+          <img src="{% static 'SearchLogo.jpg' %}">
+        </div>
+        <div class="content">
+          <a class="header">Panacea</a>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="user icon"></i>
+            17 Credits
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="four wide column">
+      <div class="ui raised segment"> <a class="ui yellow ribbon label">Email</a> <span><b>teamorl@verano.com</b></span> </div>
+    </div>
+    <div class="five wide column">
+      <div class="ui center aligned grid">
+        <div class="one column row">
+          <button class="ui teal button"> <i class="icon search"></i> Ask Questions</button>
+        </div>
+        <div class="three column row">
+          <div class="column">
+            <div class="header">7</div>
+            <div class="header">answers</div>
+          </div>
+          <div class="column">
+            <div class="header">17</div>
+            <div class="header">questions</div>
+          </div>
+          <div class="column">
+            <div class="header">3</div>
+            <div class="header">tags saved</div>
+          </div>
+        </div>
+        <div class="one column row">
+          <div class="item">
+            <i class="feed icon"></i> <span class="content">Member for 17 days</span>
+          </div>
+        </div>
+        <div class="one column row">
+          <div class="item">
+            <i class="idea icon"></i> <span class="content">Perfectly participate in 1 tags with 7 answers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="one wide column"></div>
+  </div>
+</div>
+
+<!--Tags and Courses' Index-->
+<div class="ui segment">
+  <div class="ui five column grid">        
+    
+    <div class="two wide column"></div>
+    
+    <div class="three wide column">
+      <div class="row">
+        <h3 class="ui header">
+          <div class="content">Courses</div>
+        </h3>
+        <div class="ui list">
+          <div class="item">
+            <img class="ui avatar image" src="{% static 'SearchLogo.jpg' %}">
+            <div class="content">
+              <a class="header">Software Engineering</a>
+              <div class="description">Last seen watching <a><b>Pull Request</b></a> just now.</div>
+            </div>
+          </div>
+          <div class="item">
+            <img class="ui avatar image" src="{% static 'SearchLogo.jpg' %}">
+            <div class="content">
+              <a class="header">Object oriented</a>
+              <div class="description">Last seen watching <a><b>Object Request</b></a> just now.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="NextRowOfQuestion" class="row">
+        <h3 class="ui header">
+          <div class="content">Questions</div>
+        </h3>
+        <div class="ui list">
+          <div class="item">
+            <img class="ui avatar image" src="{% static 'SearchLogo.jpg' %}">
+            <div class="content">
+              <a class="header">Teamorl</a>
+              <div class="description">Panacea has answered <a><b>Te Conozco</b></a> just now.</div>
+            </div>
+          </div>
+          <div class="item">
+            <img class="ui avatar image" src="{% static 'SearchLogo.jpg' %}">
+            <div class="content">
+              <a class="header">Hojas del Verano</a>
+              <div class="description">Panacea has answered <a><b>^teamorl$</b></a> just now.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ten wide column">
+      <div class="row">
+        <h3 class="ui header">
+          <div class="content">Top Tags(3)</div>
+        </h3>
+        <div class="ui cards">
+          <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+              <div class="header">
+                Compiler
+              </div>
+              <div class="description">
+                A compiler is a computer programthat transforms source code...
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui red button"> <i class="heart icon"></i> Like </div>
+                <a class="ui basic red left pointing label"> 17 </a>
+              </div>
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+              <div class="header">
+                Teamorl
+              </div>
+              <div class="description">
+                Para Hojas del Verano, Te Conozco
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui red button"> <i class="heart icon"></i> Like </div>
+                <a class="ui basic red left pointing label"> 17 </a>
+              </div>
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+              <div class="header">
+                Data
+              </div>
+              <div class="description">
+                Data is a set of values of qualitative or quantitative variables
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui red button"> <i class="heart icon"></i> Like </div>
+                <a class="ui basic red left pointing label"> 17 </a>
+              </div>
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="NextRowOfCourses"class="row">
+        <h3 class="ui header">
+          <div class="content">Newest Courses</div>
+        </h3>
+        <table class="ui very basic collapsing celled table">
+          <thead>
+            <tr>
+              <!--Record the "title" column of table-->
+              <th>Courses</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Reference</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img src="{% static 'SearchLogo.jpg' %}" class="ui mini rounded image">
+                  <div class="content"> Software Engineering <div class="sub header">PocketPanacea </div> </div>
+                </h4>
+              </td>
+
+              <td>Start From 2015-09-14</td>
+              <td>End With 2016-01-07</td>
+              <td>URL Of Reference</td>
+            </tr>
+
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img src="{% static 'SearchLogo.jpg' %}" class="ui mini rounded image">
+                  <div class="content"> Software Engineering <div class="sub header">PocketPanacea </div> </div>
+                </h4>
+              </td>
+
+              <td>Start From 2015-09-14</td>
+              <td>End With 2016-01-07</td>
+              <td>URL Of Reference</td>
+            </tr>
+
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img src="{% static 'SearchLogo.jpg' %}" class="ui mini rounded image">
+                  <div class="content"> Software Engineering <div class="sub header">PocketPanacea </div> </div>
+                </h4>
+              </td>
+
+              <td>Start From 2015-09-14</td>
+              <td>End With 2016-01-07</td>
+              <td>URL Of Reference</td>
+            </tr>
+
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="one wide column"></div>
+
+  </div>
+</div>

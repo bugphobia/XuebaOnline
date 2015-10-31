@@ -1,0 +1,104 @@
+{% load staticfiles %}
+
+<div class="ui segment">
+  <div class="ui five column grid">
+    <div class="two wide column"></div>
+    <div class="three wide column">
+      <div id="SideMenuOfSettings" class="ui fluid vertical menu">
+        <a class="active item"> <i class="angle right icon"></i> Edit Profile </a>
+        <a class="item"> <i class="angle right icon"></i> Preferences </a>
+        <a class="item"> <i class="edit icon"></i> Privileges </a>
+      </div>
+    </div>
+    <div class="one wide column"></div>
+    <div class="nine wide column">
+      <div class="row">
+        <h2 class="ui header">Edit Profile</h2>
+      </div>
+      <div class="ui section divider"></div>
+      
+      <div class="row" style="margin-top: 1em">
+        <h3 class="ui header">Private information</h3>
+        <div class="ui two column grid">
+          <div class="four wide center aligned column">
+            <div class="row"> <img id="EditProfilePicture" class="ui image" src="{% static 'SearchLogo.jpg' %}"> </div>
+            <div class="row" style="margin-top: 1em"> <button class="ui primary button">Upload</button> </div>
+          </div>
+          <div class="eleven wide column">
+            <div class="row">
+              <div class="ui form">
+                <div class="three fields">
+                  <div class="field">
+                    <label>First name</label>
+                    <input placeholder="First Name" type="text">
+                  </div>
+                  <div class="field">
+                    <label>Middle name</label>
+                    <input placeholder="Middle Name" type="text">
+                  </div>
+                  <div class="field">
+                    <label>Last name</label>
+                    <input placeholder="Last Name" type="text">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1em">
+              <div class="ui form">
+                <div class="field">
+                  <label>E-mail</label>
+                  <input placeholder="teamorl@verano.com" type="email">
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1em">
+              <div class="ui form">
+                <div class="field">
+                  <label>Birthday</label>
+                  <input placeholder="YYYY/MM/DD, only used for displayiing age" type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui section divider"></div>
+      
+      <div class="row" style="margin-top: 1em">
+        <h3 class="ui header">public information</h3>
+        <div class="row">
+          <div class="ui form">
+            <div class="two fields">
+              <div class="field">
+                <label>Display</label>
+                <input type="text">
+              </div>
+              <div class="field">
+                <label>location</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui section divider"></div>
+
+      <div class="row" style="margin-top: 1em">
+        <h3 class="ui header">Career</h3>
+        <div class="row">
+          <div class="ui form">
+            <div class="field">
+              <label>Where do you code?</label>
+                <div class="ui buttons">
+                  <button class="ui button">Work</button>
+                  <button class="ui button">School</button>
+                  <button class="ui button">Other</button>
+                </div>
+            </div>
+          </div>            
+        </div>
+      </div>
+    </div>
+    <div class="one wide column"></div>
+  </div>
+</div>

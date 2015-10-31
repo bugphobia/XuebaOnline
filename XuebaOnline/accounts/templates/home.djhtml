@@ -3,19 +3,132 @@
 {% block title %} Accounts Home {% endblock %}
 
 {% block body %}
+
   {% if user %}
-  	<div>
-  	{% include "post_signin_header.djhtml" %}
-	</div>
-	<div>
-	  <h1>Welcome Home, {{ user.username }}.</h1>
-	</div>
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  <div>
+    <h1>Welcome Home, {{ user.username }}.</h1>
+  </div>
   {% else %}
-  	<div>
-  	{% include "pre_signin_header.djhtml" %}
-  	</div>
-  	<div>
-  	  <h1>Welcome Home.</h1>
-  	</div>
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+    <div>
+      <h1>Welcome Home.</h1>
+    </div>
   {% endif %}
+
+  {% include 'mainmenu.djhtml' %}
+
+  {% load staticfiles %}
+
+  <style type="text/css">
+  #PersonalMenu {
+    margin-left: 0em;
+  }
+  #PictureOfCard {
+    width: 60%;
+    margin-left: 2em;
+  }
+  #NextRowOfQuestion, #NextRowOfCourses {
+    margin-top: 2em;
+  }
+  #SideMenuOfSettings {
+    margin-left: 2em;
+  }
+  #EditProfilePicture {
+    width: 100%;
+    height: 100%;
+    max-width: 15em;
+    max-height: 15em;
+  }
+  #ActivityPage {
+    margin-left: 2em;
+  } 
+  </style>
+
+  <script type="text/javascript">
+  semantic.dropdown = {};
+  semantic.dropdown.ready = function() {
+    $('.menu .item')
+      .tab()
+    ;
+  };
+  </script>
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">User</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <!--Stackable menu of Quick Link to Course, Question, UserInfo, Search-->
+    <div class="ui stackable menu">
+      <div class="ui container">
+        <div class="item">
+          <h3 class="ui header">
+            <img class="ui middle aligned image" src="{% static 'SearchLogo.jpg' %}">
+            <div class="content">
+              XueBaOnline
+            </div>
+          </h3>
+        </div>
+
+        <div class="right item">
+          <div class="ui four column grid">
+            <div class="column"><button class="ui inverted orange button">&nbsp;&nbsp;Course&nbsp;&nbsp;</button></div>
+            <div class="column"><button class="ui inverted orange button">Question</button></div>
+            <div class="column"><button class="ui inverted orange button">UserInfo</button></div>
+            <div class="column"><button class="ui inverted orange button">&nbsp;&nbsp;Search&nbsp;&nbsp;</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Menu Containing Profile, Activity and Settings-->
+    <div id="PersonalMenu" class="ui secondary pointing tabular menu">
+      <div class="ui container">
+        <a class="item active" data-tab="Profile">Profile</a>
+        <a class="item" data-tab="Activity">Activity</a>
+        <a class="item" data-tab="Settings">Settings</a>
+      </div>
+    </div>
+
+    <div class="ui bottom attached tab segment active" data-tab="Profile">
+      {% include 'ProfilePage.djhtml' %}
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="Activity">
+      {% include 'ActivityPage.djhtml' %}
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="Settings">
+      {% include 'Settings.djhtml' %}
+    </div>
+
+
+  </div>
+
+  {% include 'footmenu.djhtml' %}
+
 {% endblock %}
