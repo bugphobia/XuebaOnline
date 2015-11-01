@@ -4,9 +4,6 @@
 
 {% block body %}
 
-  <!--Just load for location-->
-  {% include 'mainmenu.djhtml' %}
-  
   {% if user %}
     <div>
     {% include "post_signin_header.djhtml" %}
@@ -57,6 +54,7 @@
 
     <!--These Code Should be deleted and be exchanged with css-->
     <!--Top Menu Different from Fixed-->
+	<!--Just load for location-->
     <div class="ui stackable inverted menu">
       <div class="ui container">
         <a class="active item">Home</a>

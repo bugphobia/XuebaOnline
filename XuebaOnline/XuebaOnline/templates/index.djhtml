@@ -1,5 +1,6 @@
 <!--Author : Panacea -->
 <!--Modify : Fihezro, Last Fixed 2015/10/28-->
+<!--Modify : Panacea, Last Fixed 2015/11/01-->
 
 {% extends "base.djhtml" %}
 {% load staticfiles %}
@@ -8,6 +9,9 @@
 
 {% block body %}
 <div class="pusher">
+
+  {% include 'mainmenuNotFixed.djhtml' %}
+
   {% if user %}
   	{% if user.username %}
       {% include 'post_signin_header.djhtml' %}
@@ -17,9 +21,10 @@
   {% else %}
     {% include 'pre_signin_header.djhtml' %}
   {% endif %}
+
   <!--Main Contents Without Introduction and Foot-->
   <!--Image should be changed (searching"{% static 'SearchLogo.jpg' %}")-->
-  <div class="ui five column divided vertically padded stackable grid">
+  <div class="ui five column divided vertically padded stackable grid" style="padding-top: 0em">
     <div class="two wide column">
     </div>
 
