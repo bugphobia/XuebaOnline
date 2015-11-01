@@ -1,0 +1,71 @@
+{% load staticfiles %}
+
+<div class="ui segment">
+  
+  <div class="ui grid">
+    
+    <div class="row">
+      <div class="ui segment" style="margin-left: 1em">
+        <div class="ui comments">
+          <div class="comment">
+            <a class="avatar">
+              <img src="{% static 'SearchLogo.jpg' %}">
+            </a>
+            <div class="content">
+              <a class="content">(The Details of the link)Panacea Has Falled in love with teamorl</a>
+              <div class="metadata">
+                <div class="date">2 days ago</div>
+                <div class="rating">
+                  <i class="star icon"></i>
+                  5 Faves
+                </div>
+              </div>
+              <div class="text">
+                (The content of the link)Panacea, teamorl, para hojas del verano
+              </div>
+              <a class="content">www.teamorl.com</a>
+              <div class="actions">
+                <a class="reply">Reply</a>
+                <a class="save">Save</a>
+                <a class="hide">Hide</a>
+                <a>
+                  <i class="expand icon"></i>
+                  Full-screen
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <a class="ui card" style="margin-left: 1em" href="#">
+        <div class="content">
+          <div class="header">(The Details of the link)Panacea Has Falled in love with teamorl</div>
+          <div class="meta">
+            <span>www.teamorl.com</span>
+          </div>
+          <div class="description">
+            <div class="text">
+              (The content of the link)Panacea, teamorl, para hojas del verano
+            </div>
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="right author">
+            <img class="ui avatar image" src="{% static 'SearchLogo.jpg' %}"> Panacea(the resource of scrapy such as stackoverflow, baidu etc.)
+          </div>
+          <div class="right aligned meta">
+            <div class="date">2 days ago</div>
+          </div>
+        </div>
+        <div class="extra">
+          Rating:
+          <div class="ui star rating" data-rating="3"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>

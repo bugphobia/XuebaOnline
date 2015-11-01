@@ -1,0 +1,100 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <!--Just load for location-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">User</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="ui five column grid">
+      <div class="center aligned row" style="margin-bottom: 1em">
+       <div class="three wide column"></div>
+
+        <div class="ten wide column">
+          <div class="ui large fluid search">
+            <img src="{% static 'SearchLogo.jpg' %}" class="ui avatar image">
+            <div class="ui icon input">
+              <input class="prompt" placeholder="Search..." type="text">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+            <button class="ui blue basic button" style="margin-left: 2em">
+              <i class="icon tag"></i>
+              Search
+            </button>
+          </div>
+         </div>
+       <div class="three wide column"></div>
+      </div>
+
+      <div class="row">
+        <div class="one wide column"></div>
+        <div class="two wide center aligned column">
+          <div class="ui fluid vertical menu">
+            <a class="active item" data-tab="first"> <i class="angle right icon"></i> Simple Link </a>
+            <a class="item" data-tab="second"> <i class="angle right icon"></i> Courses </a>
+            <a class="item" data-tab="third"> <i class="angle right icon"></i> Questions </a>
+            <a class="item" data-tab="fourth"> <i class="angle right icon"></i> Other </a>
+          </div>
+        </div>
+        <div class="eleven wide column">
+          <div class="ui bottom attached active tab segment" data-tab="first">
+            {% include 'Search_Link.djhtml' %}
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="second">
+            {% include 'Search_Courses.djhtml' %}
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="third">
+            {% include 'Search_Questions.djhtml' %}
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="fourth">
+            {% include 'Search_Other.djhtml' %}
+          </div>
+        </div>
+        <div class="two wide column"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  {% include 'footmenu.djhtml' %}
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block body %}
+  <style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    #main {
+      width: 450px;
+    }
+   #page {
+     margin-top: 20px;
+   }
+  </style>
+  <div id="page" class="ui middle aligned center aligned grid">
+    <div id ="main" class="column">
+      <h2 class="ui header">
+        <i class="user add icon"></i>
+        <div class="content">
+          Create a new account
+          <div class="sub header">XuebaOnline</div>
+        </div>
+      </h2>
+      {% if errors %}
+        <form class="ui large error form" action="/accounts/signup/" method="post">{% csrf_token %}
+      {% else %}
+          <form class="ui large form" action="/accounts/signup/" method="post">{% csrf_token %}
+      {% endif %}
+      
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" placeholder="Your Username">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="mail icon"></i>
+              <input type="text" name="email" placeholder="Your E-mail Address">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Your Password">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="repassword" placeholder="Confirm The Password">
+            </div>
+          </div>
+          <button class="ui fluid large green submit button" type="submit">Create</button>
+        </div>
+        {% if errors %}
+          <div class="ui error message">
+            <div class="header">Sign Up Failed</div>
+            {% for error in form.errors.items %}
+              <p>{{ error|escape }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </form>
+      <div class="ui message">
+        Already have an account? <a href="/accounts/signin/">Log In</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
