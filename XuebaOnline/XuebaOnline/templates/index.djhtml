@@ -13,7 +13,7 @@
   {% include 'mainmenuNotFixed.djhtml' %}
 
   {% if user %}
-  	{% if user.username %}
+    {% if user.username %}
       {% include 'post_signin_header.djhtml' %}
     {% else %}
       {% include 'pre_signin_header.djhtml' %}
@@ -100,7 +100,7 @@
     <!--SearchLogo, Content and search with button-->
     <div class="six wide middle aligned center aligned column">
       <div class="ui vertical segment">
-        <img src="{% static 'SearchLogo.jpg' %}" class="image">
+        <img src="{% static 'SearchLogo.jpg' %}" class="ui avatar small image">
         <h2 class="ui header">
           <div class="content">
             Search With Tags
@@ -109,8 +109,8 @@
       </div>
 
       <div class="ui vertical segment">
-        <div class="ui large search">
-          <div class="ui icon input">
+        <div class="ui large fluid search">
+          <div class="ui icon fluid input" style="margin-left: 1em; margin-right: 1em;">
             <input class="prompt" placeholder="Search..." type="text">
             <i class="search icon"></i>
           </div>
