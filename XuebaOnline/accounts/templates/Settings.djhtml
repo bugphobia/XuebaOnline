@@ -12,17 +12,24 @@
     </div>
     <div class="one wide column"></div>
     <div class="nine wide column">
-      <div class="row">
-        <h2 class="ui header">Edit Profile</h2>
+      <div class="ui clearing secondary teal segment">
+        <div id ="editButton" class="ui right floated animated button" tabindex="0">
+          <div class="visible content">
+            <i class="setting icon"></i>
+          </div>
+          <div class="hidden content">
+            Edit
+          </div>
+        </div>
+        <h2 class="ui left floated header">
+          Profile
+        </h2>
       </div>
-      <div class="ui section divider"></div>
-      
-      <div class="row" style="margin-top: 1em">
+      <div class="ui yellow segment">
         <h3 class="ui header">Private information</h3>
         <div class="ui two column grid">
           <div class="four wide center aligned column">
             <div class="row"> <img id="EditProfilePicture" class="ui image" src="{% static 'SearchLogo.jpg' %}"> </div>
-            <div class="row" style="margin-top: 1em"> <button class="ui primary button">Upload</button> </div>
           </div>
           <div class="eleven wide column">
             <div class="row">
@@ -30,15 +37,23 @@
                 <div class="three fields">
                   <div class="field">
                     <label>First name</label>
-                    <input placeholder="First Name" type="text">
-                  </div>
-                  <div class="field">
-                    <label>Middle name</label>
-                    <input placeholder="Middle Name" type="text">
+                    <div class="ui basic label">
+                      {% if user.first_name %}
+                        {{ user.first_name }}
+                      {% else %}
+                        None
+                      {% endif %}
+                    </div>
                   </div>
                   <div class="field">
                     <label>Last name</label>
-                    <input placeholder="Last Name" type="text">
+                    <div class="ui basic label">
+                      {% if user.last_name %}
+                        {{ user.last_name }}
+                      {% else %}
+                        None
+                      {% endif %}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -47,7 +62,13 @@
               <div class="ui form">
                 <div class="field">
                   <label>E-mail</label>
-                  <input placeholder="teamorl@verano.com" type="email">
+                  <div class="ui basic label">
+                    {% if user.email %}
+                      {{ user.email }}
+                    {% else %}
+                      None
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
@@ -55,16 +76,77 @@
               <div class="ui form">
                 <div class="field">
                   <label>Birthday</label>
-                  <input placeholder="YYYY/MM/DD, only used for displayiing age" type="text">
+                  <div class="ui basic label">
+                    {% if profile.birthday %}
+                      {{ profile.birthday }}
+                    {% else %}
+                      None
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          
+          <!-- edit profile model  -->
+          <div id="editProfile" class="ui modal">
+            <div class="header">
+              Edit Profile
+            </div>
+            <div class="image content">
+              <div class="ui medium image">
+                <img src={% static 'SearchLogo.jpg' %}>
+              </div>
+              <form id="profileForm" class="ui description" action="#" method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="ui form">
+                    <div class="three fields">
+                      <div class="field">
+                        <label>First name</label>
+                        <input placeholder="First Name" type="text" name ="first_name">
+                      </div>
+                      <div class="field">
+                        <label>Last name</label>
+                        <input placeholder="Last Name" type="text" name="last_name">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1em">
+                  <div class="ui form">
+                    <div class="field">
+                      <label>E-mail</label>
+                      <input placeholder="teamorl@verano.com" type="email" name="email">
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1em">
+                  <div class="ui form">
+                    <div class="field">
+                      <label>Birthday</label>
+                      <input placeholder="YYYY/MM/DD, only used for displayiing age" type="text" name="birthday">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="actions">
+              <div class="ui black deny button">
+                Cancel
+              </div>
+              <div class="ui positive right labeled icon button">
+                OK
+                <i class="checkmark icon"></i>
+              </div>
+            </div>
+          </div>
+          <!-- edit profile model end -->
+          
         </div>
       </div>
-      <div class="ui section divider"></div>
       
-      <div class="row" style="margin-top: 1em">
+      <div class="ui olive segment">
         <h3 class="ui header">public information</h3>
         <div class="row">
           <div class="ui form">
@@ -81,9 +163,8 @@
           </div>
         </div>
       </div>
-      <div class="ui section divider"></div>
 
-      <div class="row" style="margin-top: 1em">
+      <div class="ui green segment">
         <h3 class="ui header">Career</h3>
         <div class="row">
           <div class="ui form">

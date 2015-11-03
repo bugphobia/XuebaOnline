@@ -42,12 +42,35 @@
   </style>
 
   <script type="text/javascript">
-  semantic.dropdown = {};
-  semantic.dropdown.ready = function() {
+   $(document).ready(function() {
     $('.menu .item')
       .tab()
-    ;
-  };
+       ;
+
+     $('.ui.modal')
+        .modal()
+       .modal('setting','onApprove',function(){
+         retobj = $.ajax({
+           async:false,
+           url:'#',
+           method:'post',
+           data:$('#profileForm').serialize(),
+           dataType:"json"
+         });
+
+         var obj=retobj.responseJSON;
+         if (obj.isOK) {
+           return true;
+         } else {
+           return false;
+         }
+       })
+       ;
+
+     $('#editButton').click(function(){
+       $('.ui.modal').modal('show');
+     });
+   });
   </script>
 
   <div class="pushter">

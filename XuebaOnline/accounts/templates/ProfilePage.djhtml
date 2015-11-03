@@ -13,7 +13,7 @@
           <img src="{% static 'SearchLogo.jpg' %}">
         </div>
         <div class="content">
-          <a class="header">Panacea</a>
+          <a class="header">{{ user.username }}</a>
         </div>
         <div class="extra content">
           <a>
@@ -25,7 +25,7 @@
     </div>
     
     <div class="four wide column">
-      <div class="ui raised segment"> <a class="ui yellow ribbon label">Email</a> <span><b>teamorl@verano.com</b></span> </div>
+      <div class="ui raised segment"> <a class="ui yellow ribbon label">Email</a> <span><b>{{ user.email }}</b></span> </div>
     </div>
     <div class="five wide column">
       <div class="ui center aligned grid">

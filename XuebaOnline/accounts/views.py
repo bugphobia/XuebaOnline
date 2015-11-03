@@ -1,20 +1,46 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader, Context
+import json
 
 from django.contrib.auth.models import User
-from django.forms import ModelForm
+from django import forms
 
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required
 
+from .models import UserProfile
+
+class ProfileForm(forms.Form):
+    first_name = forms.CharField(required=False,max_length=255)
+    last_name = forms.CharField(required=False,max_length=255)
+    email = forms.EmailField(required=False)
+    birthday = forms.DateField(required=False,input_formats=['%Y/%m/%d'])
+
 @login_required
 def home(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            user = get_user(request)
+            fields = form.cleaned_data
+            if 'first_name' in fields:
+                user.first_name = fields['first_name']
+            if 'last_name' in fields:
+                user.last_name = fields['last_name']
+            if 'email' in fields:
+                user.email = fields['email']
+            user.save()
+            profile = user.userprofile
+            if 'birthday' in form.fields:
+                profile.birthday = fields['birthday']
+            profile.save()
+        return HttpResponse(json.dumps({'isOK':True if form.is_valid() else False}),
+                                       content_type='application/json')
+    
     user = get_user(request)
-    if user is not None:
-        return HttpResponse(loader.get_template('home.djhtml').render(Context({"user": user})))
-    else:
-        return HttpResponse(loader.get_template('home.djhtml').render())
+    profile = user.userprofile
+    return HttpResponse(loader.get_template('home.djhtml').render(RequestContext(request,{"user": user,"profile": profile})))
 
 def signup(request):
     if request.method == 'POST':
@@ -40,6 +66,9 @@ def signup(request):
                                                     password=request.POST['password'])
                     user.is_active = True
                     user.save()
+                    profile = UserProfile()
+                    profile.user = user
+                    profile.save()
                     return redirect(signin,is_new_user=True)
                 else:
                     print(User.objects.filter(username=request.POST['username']))
