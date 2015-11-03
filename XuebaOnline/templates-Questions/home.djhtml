@@ -1,0 +1,159 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+	  <!--Just load for location-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">User</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <!--Main Page-->
+    <div class="ui grid">
+      <div class="two wide column"></div>
+
+      <!--Ask and Unanswered Questions-->
+      <div class="nine wide column">
+        <div class="ui medium header">
+          <i class="help icon"></i>
+          <div class="content">Ask Question</div>
+        </div>
+        <div class="row">
+          <div class="ui segment">
+            <div class="ui form">
+              <div class="field">
+                <label>Title Of Question</label>
+                <input type="text" placeholder="Input the tile of question...">
+              </div>
+              <div class="field">
+                <label>Details Of Question</label>
+                <textarea rows="2" placeholder="Input the details of question"></textarea>
+              </div>
+            </div>
+            <button class="ui primary button" style="margin-top: 1em">Publish</button>
+          </div>
+        </div>
+
+        <div class="ui medium header">
+          <i class="help icon"></i>
+          <div class="content">Unanswered Questions</div>
+        </div>
+        <div class="row">
+          <div class="ui segment">
+            {% include 'question.djhtml' %}
+          </div>
+        </div>
+
+      </div>
+      
+      <!--Statistic, Top Questions, and Tags-->
+      <div class="four wide column">
+        <div class="ui segment">
+          <div class="ui center aligned grid">
+            <!--Statistic-->
+            <div class="row">
+              <div class="ui tiny blue statistic">
+                <div class="value">1,171,771</div>
+                <div class="ui tag label" style="margin-top: 0.5em">Questions loaded with tags</div>
+              </div>
+            </div>
+            <!--Recommend-->
+            <div class="ui medium header">
+              <i class="calendar icon"></i>
+              <div class="content">Recommend</div>
+            </div>
+            <div class="row">
+              <div class="ui segment" style="margin-left: 1em">
+                <div class="ui comments">
+                  <div class="comment">
+                    <a class="avatar">
+                      <img src="{% static 'SearchLogo.jpg' %}">
+                    </a>
+                    <div class="content">
+                      <a class="content">(Question Tile)Why Panacea has falled in love with teamorl</a>
+                      <div class="metadata">
+                        <div class="date">2 days ago</div>
+                        <div class="rating">
+                          <i class="star icon"></i>
+                          7 Views
+                        </div>
+                      </div>
+                      <div class="text">
+                        (The content of the Question)Panacea, teamorl, para hojas del verano……
+                      </div>
+                      <div class="actions">
+                        <a class="reply">Answer</a>
+                        <a class="save">Follow</a>
+                        <a>
+                          <i class="expand icon"></i>
+                          Full-screen
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Tags-->
+            <div class="ui medium header">
+              <i class="tag icon"></i>
+              <div class="content">Favorite</div>
+            </div>
+            <div class="ui blue labels" style="margin-bottom: 1em">
+              <div class="ui list">
+                <div class="item">
+                  <a class="ui tag label">  Software <i class="icon close"></i> </a>
+                </div>
+                <div class="item">
+                  <a class="ui tag label">  Panacea <i class="icon close"></i> </a>
+                </div>
+                <div class="item">
+                  <a class="ui tag label">  PanaceaTeamorl <i class="icon close"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="one wide column"></div>
+    </div>
+
+  {% include 'footmenu.djhtml' %}
+
+{% endblock %}
