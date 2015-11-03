@@ -1,0 +1,198 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <!--Just load for location-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">User</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="ui grid">
+      <div class="row">
+        <div class="four wide column"></div>
+        <div class="five wide column">
+          <div class="ui vertical segment">
+            <div class="ui fluid search">
+              <div class="ui icon fluid input" style="margin-left: 1em; margin-right: 1em;">
+                <input class="prompt" placeholder="Search..." type="text">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="seven wide middle aligned column">
+          <button class="ui blue basic button">
+            <i class="icon tag"></i>
+            Search
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column"></div>
+        <div class="eight wide column">
+          <div class="ui header"> <i class="film icon"></i> Video</div>
+          <div class="ui embed" data-url="http://music.163.com/#/mv?id=480329" data-placeholder="{% static 'SearchLogo.jpg' %}" data-icon="right circle play">
+          </div>
+        </div>
+        <div class="five wide column">
+          <div class="ui header"> <i class="edit icon"></i> Info</div>
+          <table class="ui very basic collapsing celled table">
+            <thead>
+              <tr>
+                <th>Attributes</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <h4 class="ui header">
+                    <i class="edit icon"></i> <div class="content">Length</div>
+                  </h4>
+                </td>
+                <td>5 weeks</td>
+              </tr>
+              <tr>
+                <td>
+                  <h4 class="ui header">
+                    <i class="edit icon"></i> <div class="content">Effort</div>
+                  </h4>
+                </td>
+                <td>1 - 2 hours/week</td>
+              </tr>
+              <tr>
+                <td>
+                  <h4 class="ui header">
+                    <i class="edit icon"></i> <div class="content">Subject</div>
+                  </h4>
+                </td>
+                <td>Software</td>
+              </tr>
+              <tr>
+                <td>
+                  <h4 class="ui header">
+                    <i class="edit icon"></i> <div class="content">Languages</div>
+                  </h4>
+                </td>
+                <td>English</td>
+              </tr>          
+            </tbody>
+          </table>
+        </div>
+        <div class="one wide column"></div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column"></div>
+        <div class="thirteen wide column">
+          <div class="ui cards">
+            <div class="card">
+              <div class="content">
+                <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+                <div class="header">
+                  Compiler
+                </div>
+                <div class="description">
+                  A compiler is a computer programthat transforms source code...
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui red button"> <i class="heart icon"></i> Like </div>
+                  <a class="ui basic red left pointing label"> 17 </a>
+                </div>
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+                <div class="header">
+                  Teamorl
+                </div>
+                <div class="description">
+                  Para Hojas del Verano, Te Conozco
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui red button"> <i class="heart icon"></i> Like </div>
+                  <a class="ui basic red left pointing label"> 17 </a>
+                </div>
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+                <div class="header">
+                  Data
+                </div>
+                <div class="description">
+                  Data is a set of values of qualitative or quantitative variables
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui red button"> <i class="heart icon"></i> Like </div>
+                  <a class="ui basic red left pointing label"> 17 </a>
+                </div>
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="one wide column"></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  {% include 'footmenu.djhtml' %}
+
+{% endblock %}
