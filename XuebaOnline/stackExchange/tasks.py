@@ -9,7 +9,7 @@ from .models import *
 
 import stackexchange
 
-@shared_task
+# @shared_task
 def crawl(type_name):
     site = stackexchange.Site(stackexchange.StackOverflow,'U4DMV*8nvpm3EOpvf69Rxw((')
     site.be_inclusive()
@@ -23,7 +23,6 @@ def crawl(type_name):
         tags = site.tags()
         page = crawl_process.page if crawl_process.page > 0 else 1
         requests_left = site.requests_left
-        print("[DEBUG] requests_left=%d"%requests_left)
         while site.requests_left > 0:
             print("[DEBUG] crawl_tag:")
             print('[DEBUG] page=%d'%page)
@@ -46,21 +45,24 @@ def crawl(type_name):
                 model_tag.excerpt = tag_excerpt
                 model_tag.count = tag.count
                 model_tag.save()
-                print("[DEBUG] tag \"%s\" count=%d excerpt=%s"%(tag.name,tag.count,tag_excerpt))
             if is_page_finished:
                 page += 1
             crawl_process.page = page
             crawl_process.save()
 
     elif type_name == 'question':
-        questions = site.questionss()
+        questions = site.questions()
         page = crawl_process.page if crawl_process.page > 0 else 1
         requests_left = site.requests_left
+        print("[DEBUG] crawl_questions:")
+        print('[DEBUG] page=%d'%page)
         while requests_left > 0:
-            questions = tags.fetch_page(page)
+            questions = questions.fetch_page(page)
             requests_left = site.requests_left
             is_page_finished = True
+            print("[DEBUG] crawl_questions: requests_left=%d"%requests_left)
             for question in questions.items:
+                print('[DEBUG] processing ... > %s <'%question.title)
                 if requests_left <= 0:
                     is_page_finished = False
                     break
@@ -70,26 +72,39 @@ def crawl(type_name):
                         question_id = question.id)
                 except Question.DoesNotExist:
                     model_question = Question(body = question.body,
-                                              creation_data = question.creation_date,
+                                              creation_date = question.creation_date,
                                               question_id = question.id,
                                               score = question.score,
                                               title = question.title,
                                               url = question.url,
                                               view_count = question.view_count)
+                    model_question.save()
                 for tag in question.tags:
-                    model_tag = None
+                    print("[DEBUG]     |- tag %s --- ok!"%tag)
                     try:
-                        model_tag = Tag.objects.get(name = tag)
-                    except Tag.DoesNotExist:
-                        tag = site.tag(tag)
-                        tag_excerpt,requests_left = get_tag_excerpt(tag.name)
-                        model_tag = Tag(name = tag.name,
-                                        count = tag.count,
-                                        excerpt = tag_excerpt)
-                        model_tag.save()
-                    model_question.tags.add(model_tag)
-                model_question.save()
+                        # keep going!!!
+                        model_tag = None
+                        try:
+                            model_tag = Tag.objects.get(name = tag)
+                        except Tag.DoesNotExist:
+                            tag = site.tag(tag)
+                            tag_excerpt = ""
+                            try:
+                                tag_excerpt = site.tag_wiki(tag.name)[0].excerpt
+                            except:
+                                tag_excerpt = ""
+                            model_tag = Tag(name = tag.name,
+                                            count = tag.count,
+                                            excerpt = tag_excerpt)
+                            model_tag.save()
+                        model_question.tags.add(model_tag)
+                        model_question.save()
+                    except:
+                        print('[ERROR] --- unknown error ---')
+                        print('tag.name:%s'%tag.name)
+                        # let the program going    
                 for answer in question.answers:
+                    print("[DEBUG]     |- answer > %d <"%answer.id)
                     model_answer = Answer(body = answer.body,
                                           creation_date = answer.creation_date,
                                           answer_id = answer.id,
