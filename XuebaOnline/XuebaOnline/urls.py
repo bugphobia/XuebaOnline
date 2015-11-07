@@ -18,11 +18,13 @@ from django.contrib import admin
 from . import views
 
 from accounts import urls as accounts_urls
+from stackExchange import urls as crawl_urls
 
 urlpatterns = [
     url(r'^/{0,1}$',views.static_page,{'template_name':'index.djhtml'}),
     url(r'^index/$', views.static_page,{'template_name':'index.djhtml'}),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include(accounts_urls)),
+    url(r'^crawler/', include(crawl_urls)),
     url(r'^display/$', views.test_display_meta),
 ]

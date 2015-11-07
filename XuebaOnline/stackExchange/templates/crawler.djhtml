@@ -1,0 +1,38 @@
+<!--Author : Panacea -->
+<!--Modify : Fihezro, Last Fixed 2015/10/28-->
+<!--Modify : Panacea, Last Fixed 2015/11/01-->
+
+{% extends "base.djhtml" %}
+{% load staticfiles %}
+
+{% block title %} XuebaOnline {% endblock %}
+
+{% block body %}
+  <script>
+   $(document).ready(function() {
+     $('#crawltags').click(function(){
+       $.ajax({
+           async:false,
+           url:'/crawler/crawltags/',
+           method:'get',
+       });
+     });
+     $('#crawltags').click(function(){
+       $.ajax({
+           async:false,
+           url:'/crawler/crawltags/',
+           method:'get',
+       });
+     });
+   });
+  </script>
+  <div class="ui container grid">
+    <div class="row">
+      <div id ="crawltags" class="ui button">Crawl tags</div>
+    </div>
+    <div class="row">
+      <div id ="crawlquestions" class="ui button">Crawl questions</div>
+    </div>
+    {% include 'footer.djhtml'%}
+  </div>
+{% endblock %}
