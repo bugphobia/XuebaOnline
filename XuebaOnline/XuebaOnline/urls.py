@@ -29,4 +29,6 @@ urlpatterns = [
     url(r'^display/$', views.test_display_meta),
     url(r'^search/query/$', views.query),
     url(r'^feedback/$', views.feedback),
+    url(r'^robot/$', views.robot),
+    url(r'^robot/contact', views.robot_contact, name='robot_contact')
 ]

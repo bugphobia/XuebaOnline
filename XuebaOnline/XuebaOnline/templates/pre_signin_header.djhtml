@@ -32,6 +32,10 @@
       User
     </a>
     
+    <a class="item" href="/robot/">
+      Robot
+    </a>
+    
     <div class="right item">
       <div class="ui two column very relaxed grid">
         <div class="column">

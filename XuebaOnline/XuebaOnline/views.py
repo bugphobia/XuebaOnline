@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader, Context
 from django.contrib.auth import get_user
 from django.shortcuts import render,redirect,render_to_response
@@ -6,6 +6,11 @@ from django.shortcuts import render,redirect,render_to_response
 from django.contrib.auth.models import User
 from stackExchange.models import *
 from stackExchange.func import *
+
+from urllib.request import urlopen
+from urllib.parse import urlencode
+import json
+
 
 def static_page(request,template_name):
     user = get_user(request)
@@ -60,10 +65,28 @@ def query(request):
     else:
         return redirect(index) 
 
+def robot(request):
+    user = get_user(request)
+    return render(request, 'airobot/index.djhtml', {'user': user})
+
+def robot_contact(request):
+    api_key = '5dac53a40b604ab5486d8cb6a96ad160'
+    api_url = 'http://www.tuling123.com/openapi/api'
+    u_line = request.GET['content_text']
+    info = u_line.encode('utf-8')
+    params = urlencode({'key':api_key, 'info':info})
+    requrl = api_url + '?%s' % params
+    responseText = urlopen(requrl)
+    rsp = eval(responseText.read())
+
+    kind = rsp['code']
+    text = rsp['text']
+    print(text)
+    return JsonResponse(rsp)
 
 def test_display_meta(request):
-        values = request.META.items()
-        html = []
-        for k, v in values:
-                html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
-        return HttpResponse('<table>%s</table>' % '\n'.join(html))
+    values = request.META.items()
+    html = []
+    for k, v in values:
+        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+    return HttpResponse('<table>%s</table>' % '\n'.join(html))

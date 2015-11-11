@@ -1,0 +1,149 @@
+{% extends "base.djhtml" %}
+{% load staticfiles %}
+
+{% block title %} AI Robot {% endblock %}
+
+{% block headsup %}
+
+<!-- meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"--> 
+<link rel="stylesheet" type="text/css" href="{% static 'talk_default.css' %}">
+<link rel='stylesheet prefetch' href='http://fonts.useso.com/css?family=Open+Sans'>
+<link rel="stylesheet" type="text/css" href="{% static 'talk_styles.css' %}">
+<!--[if IE]>
+	<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<![endif]-->
+{% endblock %}
+
+{% block body %}
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+		$("#inputBar").keypress(function(e) {
+		
+			if (e.which == 13) {
+		
+				var str = $("#inputBar").val();
+				if(str.length != 0) {
+
+					myMessage = "<div class=\"chat__msgRow\"><div class=\"chat__message mine\">"+ str +"</div></div>";
+					$("#chatScreen").append(myMessage);
+					$("#inputBar").val("");
+					$.getJSON("/robot/contact/", {'content_text': str}, function(ret) {
+						robotMessage = "<div class=\"chat__msgRow\"><div class=\"chat__message notMine\">"+ ret.text +"</div></div>";
+						$("#chatScreen").append(robotMessage);
+					})
+				}
+			}
+		})
+	});
+
+
+	/*function enterSumbit(str){
+
+		var event=arguments.callee.caller.arguments[0]||window.event;
+		if (event.keyCode == 13){
+			var xmlhttp;
+			if (str.length == 0)
+				return;
+
+			myMessage = "<div class=\"chat__msgRow\"><div class=\"chat__message mine\">"+ str +"</div></div>";
+			document.getElementById("chatScreen").innerHTML += myMessage;
+			var inputline = document.getElementById("inputBar");
+			inputline.value = "";
+
+			if (window.XMLHttpRequest)
+			{   // code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			}
+			else
+			{	// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function()
+			{
+				if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				{
+					var obj = eval("(" + xmlhttp.responseText + ")");
+					robotMessage = "<div class=\"chat__msgRow\"><div class=\"chat__message notMine\">"+ obj.text +"</div></div>";
+					document.getElementById("chatScreen").innerHTML += robotMessage;
+				}
+			}
+			xmlhttp.open("GET", "/robot/contact?content_text="+str, true);
+			xmlhttp.send();
+		}
+	}*/
+	</script>
+
+	<div class="pusher">
+
+  	{% include 'mainmenuNotFixed.djhtml' %}
+
+  	{% if user %}
+    	{% if user.username %}
+      		{% include 'post_signin_header.djhtml' %}
+    	{% else %}
+      		{% include 'pre_signin_header.djhtml' %}
+    	{% endif %}
+  	{% else %}
+    	{% include 'pre_signin_header.djhtml' %}
+  	{% endif %}
+	<div class="demo">
+		  <svg class="sidebar" viewBox="0 0 300 500">
+			<path class="s-path" fill="#fff" d="M0,0 50,0 a0,250 0 1,1 0,500 L0,500" />
+		  </svg>
+		  <div class="static">
+			<div class="static__text">Pull white sidebar to the right, Choose a robot</div>
+		  </div>
+		  <div class="sidebar-content">
+			<div class="contact">
+			  <img src="{% static 'img/1.png' %}" alt="" class="contact__photo" />
+			  <span class="contact__name">Ethan Hawke</span>
+			  <span class="contact__status online"></span>
+			</div>
+			<div class="contact">
+			  <img src="{% static 'img/2.png' %}" alt="" class="contact__photo" />
+			  <span class="contact__name">Natalie Portman</span>
+			  <span class="contact__status online"></span>
+			</div>
+			<div class="contact">
+			  <img src="{% static 'img/3.png' %}" alt="" class="contact__photo" />
+			  <span class="contact__name">Kevin Spacey</span>
+			  <span class="contact__status online"></span>
+			</div>
+			<div class="contact">
+			  <img src="{% static 'img/4.png' %}" alt="" class="contact__photo" />
+			  <span class="contact__name">Rosamund Pike</span>
+			  <span class="contact__status online"></span>
+			</div>
+			<div class="contact">
+			  <img src="{% static 'img/5.png' %}" alt="" class="contact__photo" />
+			  <span class="contact__name">Robert Redford</span>
+			  <span class="contact__status online"></span>
+			</div>
+			<div class="contact">
+			  <img src="{% static 'img/6.png' %}" alt="" class="contact__photo" />
+			  <span class="contact__name">Scarlett Johansson</span>
+			  <span class="contact__status online"></span>
+			</div>
+			<div class="search">
+			  <img src="{% static 'img/t8TeL1S.png' %}" alt="" class="search__img" />
+			  <input type="text" class="search__input" placeholder="Search" />
+			</div>
+		  </div>
+		  <div class="chat">
+			<span class="chat__back"></span>
+			<span class="chat__status">status</span>
+			<div class="chat__person">
+			  <span class="chat__online active"></span>
+			  <span class="chat__name">Huehue Huehue</span>
+			</div>
+			<div class="chat__messages" id="chatScreen">
+			</div>
+			<input id="inputBar" type="text" onkeydown="enterSumbit(this.value)" class="chat__input" placeholder="Your message" />
+		  </div>
+		</div>
+	</div>
+	<script type="text/javascript" src="{% static 'talk_stopExecutionOnTimeout.js' %}"></script>
+	<script type="text/javascript" src="{% static 'talk_main.js' %}"></script>
+{% endblock %}
