@@ -21,8 +21,8 @@ from accounts import urls as accounts_urls
 from stackExchange import urls as crawl_urls
 
 urlpatterns = [
-    url(r'^/{0,1}$',views.static_page,{'template_name':'index.djhtml'}),
-    url(r'^index/$', views.static_page,{'template_name':'index.djhtml'}),
+    url(r'^/{0,1}$',views.index),
+    url(r'^index/$', views.index),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^crawler/', include(crawl_urls)),
