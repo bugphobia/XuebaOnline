@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader, Context
 
 from .models import CrawlProcess
-from .tasks import crawl
+from stackExchange.tasks import crawl
 
 import json
 
@@ -26,4 +26,4 @@ def get_process(request,type_name):
 
 def lauch_fetch(request,type_name):
     if type_name == 'tag' or type_name == 'question':
-        crawl(type_name)
+        crawl.delay(type_name)

@@ -10,6 +10,9 @@ from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required
 
 from .models import UserProfile
+from stackExchange.models import Tag
+
+import datetime
 
 class ProfileForm(forms.Form):
     first_name = forms.CharField(required=False,max_length=255)
@@ -17,6 +20,81 @@ class ProfileForm(forms.Form):
     email = forms.EmailField(required=False)
     birthday = forms.DateField(required=False,input_formats=['%Y/%m/%d'])
 
+@login_required
+def like_tag(request):
+    user = get_user(request)
+    profile = user.userprofile
+    tags = Tag.objects.all()[request.session['tagLastStartPos']:request.session['tagStartPos']]
+    if 'tag_name' in request.GET:
+        print(request.GET['tag_name'])
+        try:
+            tag = Tag.objects.get(name=request.GET['tag_name'])
+            profile.saved_tags.add(tag)
+            profile.save()
+        except:
+            # nothing to do
+            pass
+    return HttpResponse(loader.get_template('ProfilePage.djhtml').render(
+        RequestContext(request,
+                       {'user':user,'profile':profile,'tags':tags,
+                        'saved_tags':profile.saved_tags.all(),
+                        'saved_tags_count':profile.saved_tags.count(),
+                        'questions_count':profile.questions.count(),
+                        'answers_count':profile.questions.count(),
+                        'created_days':(datetime.date.today()-profile.creation_date).days})))
+
+@login_required
+def dislike_tag(request):
+    user = get_user(request)
+    profile = user.userprofile
+    tags = Tag.objects.all()[request.session['tagLastStartPos']:request.session['tagStartPos']]
+    if 'tag_name' in request.GET:
+        print(request.GET['tag_name'])
+        try:
+            tag = Tag.objects.get(name=request.GET['tag_name'])
+            profile.saved_tags.remove(tag)
+            profile.save()
+        except:
+            # nothing to do
+            pass
+    return HttpResponse(loader.get_template('ProfilePage.djhtml').render(
+        RequestContext(request,
+                       {'user':user,'profile':profile,'tags':tags,
+                        'saved_tags':profile.saved_tags.all(),
+                        'saved_tags_count':profile.saved_tags.count(),
+                        'questions_count':profile.questions.count(),
+                        'answers_count':profile.questions.count(),
+                        'created_days':(datetime.date.today()-profile.creation_date).days})))
+    
+@login_required
+def get_tags(request):
+    startPos = request.session['tagStartPos']
+    step = 2
+    if 'requiredTagCount' in request.POST:
+        step = int(request.POST['requiredTagCount'])
+    print(startPos)
+    print(step)
+    tags = Tag.objects.all()[startPos:startPos+step]
+    request.session['tagStartPos'] = startPos + step
+    request.session['tagLastStartPos'] = startPos
+    user = get_user(request)
+    profile = user.userprofile
+    return HttpResponse(loader.get_template('ProfilePage.djhtml').render(
+        RequestContext(request,
+                       {'user':user,'profile':profile,'tags':tags,
+                        'saved_tags':profile.saved_tags.all(),
+                        'saved_tags_count':profile.saved_tags.count(),
+                        'questions_count':profile.questions.count(),
+                        'answers_count':profile.questions.count(),
+                        'created_days':(datetime.date.today()-profile.creation_date).days})))
+
+@login_required
+def get_settings(request):
+    user = get_user(request)
+    profile = user.userprofile
+    return HttpResponse(loader.get_template('Settings.djhtml').render(
+        RequestContext(request,{'user':user,'profile':profile,'birthday':profile.birthday.strftime('%Y/%m/%d')})))
+    
 @login_required
 def home(request):
     if request.method == 'POST':
@@ -37,10 +115,21 @@ def home(request):
             profile.save()
         return HttpResponse(json.dumps({'isOK':True if form.is_valid() else False}),
                                        content_type='application/json')
-    
     user = get_user(request)
     profile = user.userprofile
-    return HttpResponse(loader.get_template('home.djhtml').render(RequestContext(request,{"user": user,"profile": profile})))
+    request.session['tagLastStartPos'] = 0
+    request.session['tagStartPos'] = 2
+    tags = Tag.objects.all()[0:2]
+    
+    return HttpResponse(loader.get_template('home.djhtml').render(
+        RequestContext(request,
+                       {"user": user,"profile": profile,'tags':tags,
+                        'birthday':profile.birthday.strftime('%Y/%m/%d'),
+                        'saved_tags':profile.saved_tags.all(),
+                        'saved_tags_count':profile.saved_tags.count(),
+                        'questions_count':profile.questions.count(),
+                        'answers_count':profile.questions.count(),
+                        'created_days':(datetime.date.today()-profile.creation_date).days})))
 
 def signup(request):
     if request.method == 'POST':

@@ -42,6 +42,66 @@
   </style>
 
   <script type="text/javascript">
+   function onLikeClick(name){
+     var id_data={
+       tag_name:name
+     };
+     retobj = $.ajax({
+       async:false,
+       url:'like_tag/',
+       method:'get',
+       data: id_data,
+     });
+     $('#profilePage').html(retobj.responseText);
+     $('#moreButton').click(onMoreButtonClick);
+   }
+   function onDislikeClick(name){
+     var id_data={
+       tag_name:name
+     };
+     retobj = $.ajax({
+       async:false,
+       url:'dislike_tag/',
+       method:'get',
+       data: id_data,
+     });
+     $('#profilePage').html(retobj.responseText);
+     $('#moreButton').click(onMoreButtonClick);
+   }
+   function onMoreButtonClick(){
+     retobj = $.ajax({
+       async:false,
+       url:'more_tags/',
+       method:'post',
+       data:$('#tagForm').serialize(),
+     });
+     $('#profilePage').html(retobj.responseText);
+     $('#moreButton').click(onMoreButtonClick);
+   }
+   function onModalApprove() {
+     retobj = $.ajax({
+       async:false,
+       url:'#',
+       method:'post',
+       data:$('#profileForm').serialize(),
+       dataType:"json"
+     });
+
+     var obj=retobj.responseJSON;
+     
+     if (obj.isOK) {
+       retobj = $.ajax({
+         async:false,
+         url:'get_settings',
+         method:'get'
+       });
+       $('#settings').html(retobj.responseText);
+       $('.ui.modal').modal().modal('setting','onApprove',onModalApprove);
+       return true;
+     } else {
+       return false;
+     }
+   }
    $(document).ready(function() {
     $('.menu .item')
       .tab()
@@ -49,27 +109,13 @@
 
      $('.ui.modal')
         .modal()
-       .modal('setting','onApprove',function(){
-         retobj = $.ajax({
-           async:false,
-           url:'#',
-           method:'post',
-           data:$('#profileForm').serialize(),
-           dataType:"json"
-         });
-
-         var obj=retobj.responseJSON;
-         if (obj.isOK) {
-           return true;
-         } else {
-           return false;
-         }
-       })
-       ;
+       .modal('setting','onApprove',onModalApprove);
 
      $('#editButton').click(function(){
        $('.ui.modal').modal('show');
      });
+
+     $('#moreButton').click(onMoreButtonClick);
    });
   </script>
 
@@ -132,13 +178,13 @@
       </div>
     </div>
 
-    <div class="ui bottom attached tab segment active" data-tab="Profile">
+    <div id="profilePage" class="ui bottom attached tab segment active" data-tab="Profile">
       {% include 'ProfilePage.djhtml' %}
     </div>
-    <div class="ui bottom attached tab segment" data-tab="Activity">
+    <div id="activityPage" class="ui bottom attached tab segment" data-tab="Activity">
       {% include 'ActivityPage.djhtml' %}
     </div>
-    <div class="ui bottom attached tab segment" data-tab="Settings">
+    <div id="settings" class="ui bottom attached tab segment" data-tab="Settings">
       {% include 'Settings.djhtml' %}
     </div>
 

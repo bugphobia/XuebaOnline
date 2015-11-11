@@ -9,7 +9,7 @@ from .models import *
 
 import stackexchange
 
-# @shared_task
+@shared_task
 def crawl(type_name):
     site = stackexchange.Site(stackexchange.StackOverflow,'U4DMV*8nvpm3EOpvf69Rxw((')
     site.be_inclusive()

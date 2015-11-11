@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader, Context
 from django.contrib.auth import get_user
+
 from django.shortcuts import render,redirect,render_to_response
 
 from django.contrib.auth.models import User
@@ -12,6 +13,8 @@ from urllib.parse import urlencode
 import json
 
 
+from stackExchange.models import Tag
+
 def static_page(request,template_name):
     user = get_user(request)
     return render(request, template_name, {'user': user})
@@ -20,8 +23,14 @@ def static_page(request,template_name):
 # This func will never be invoked because of the mapping setted in urls.py.
 # but will be redirected
 def index(request):
-    user = get_user(request)
-    return render(request, 'index.djhtml', {'user': user})
+    tags_color = ['red','orange','yellow','olive','green','teal',
+                  'blue','violet','purple','pink','brown','grey','black']
+    tags = Tag.objects.all().order_by('-count')[0:len(tags_color)]
+    if get_user(request) is not None:
+        user = get_user(request)
+        return HttpResponse(loader.get_template('index.djhtml').render(Context({"user": user,'tags':zip(tags_color,tags)})))
+    else:
+        return HttpResponse(loader.get_template('index.djhtml').render(Context({'tags':zip(tags_color,tags)})))
 
 def feedback(request):
     user = get_user(request)

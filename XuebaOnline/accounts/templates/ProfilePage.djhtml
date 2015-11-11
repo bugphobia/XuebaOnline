@@ -34,21 +34,21 @@
         </div>
         <div class="three column row">
           <div class="column">
-            <div class="header">7</div>
+            <div class="header">{{ answers_count }}</div>
             <div class="header">answers</div>
           </div>
           <div class="column">
-            <div class="header">17</div>
+            <div class="header"> {{ questions_count }}</div>
             <div class="header">questions</div>
           </div>
           <div class="column">
-            <div class="header">3</div>
+            <div class="header">{{ saved_tags_count }}</div>
             <div class="header">tags saved</div>
           </div>
         </div>
         <div class="one column row">
           <div class="item">
-            <i class="feed icon"></i> <span class="content">Member for 17 days</span>
+            <i class="feed icon"></i> <span class="content">Member for {{ created_days }} days</span>
           </div>
         </div>
         <div class="one column row">
@@ -118,71 +118,90 @@
     <div class="ten wide column">
       <div class="row">
         <h3 class="ui header">
-          <div class="content">Top Tags(3)</div>
+          <div class="content">Top Tags</div>
         </h3>
         <div class="ui cards">
+          {% for tag in tags %}
+            <div class="card">
+              <div class="content">
+                <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+                <div class="header">
+                  {{ tag.name }}
+                </div>
+                <div class="description">
+                  {{ tag.excerpt }}
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui labeled button" tabindex="0">
+                  <button class="ui red button" onclick="onLikeClick('{{ tag.name }}')"> <i class="heart icon"></i> Like </button>
+                  <a class="ui basic red left pointing label"> {{ tag.count }} </a>
+                </div>
+                <div class="ui labeled button" tabindex="0">
+                  <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
           <div class="card">
             <div class="content">
               <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
               <div class="header">
-                Compiler
+                More tags?
               </div>
               <div class="description">
-                A compiler is a computer programthat transforms source code...
+                <form id="tagForm" class="ui form">
+                  {% csrf_token %}
+                  <div class="field">
+                    <label>How many tags do you want?</label>
+                    <input name="requiredTagCount" value="2" placeholder="How many tags do you want" min="1" type="number">
+                  </div>
+                </form>
               </div>
             </div>
             <div class="extra content">
-              <div class="ui labeled button" tabindex="0">
-                <div class="ui red button"> <i class="heart icon"></i> Like </div>
-                <a class="ui basic red left pointing label"> 17 </a>
-              </div>
-              <div class="ui labeled button" tabindex="0">
-                <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="content">
-              <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
-              <div class="header">
-                Teamorl
-              </div>
-              <div class="description">
-                Para Hojas del Verano, Te Conozco
-              </div>
-            </div>
-            <div class="extra content">
-              <div class="ui labeled button" tabindex="0">
-                <div class="ui red button"> <i class="heart icon"></i> Like </div>
-                <a class="ui basic red left pointing label"> 17 </a>
-              </div>
-              <div class="ui labeled button" tabindex="0">
-                <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="content">
-              <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
-              <div class="header">
-                Data
-              </div>
-              <div class="description">
-                Data is a set of values of qualitative or quantitative variables
-              </div>
-            </div>
-            <div class="extra content">
-              <div class="ui labeled button" tabindex="0">
-                <div class="ui red button"> <i class="heart icon"></i> Like </div>
-                <a class="ui basic red left pointing label"> 17 </a>
-              </div>
-              <div class="ui labeled button" tabindex="0">
-                <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
-              </div>
+              <span class="right floated">
+                <button class="ui green basic labeled icon button" id="moreButton">
+                  <i class="tags icon"></i>
+                  Get more
+                </button>
+              </span>
             </div>
           </div>
         </div>
       </div>
+
+      {% if saved_tags %}
+        <div class="row">
+          <h3 class="ui header">
+            <div class="content">Saved Tags({{ saved_tags_count }})</div>
+          </h3>
+          <div class="ui cards">
+            {% for tag in saved_tags %}
+              <div class="card">
+                <div class="content">
+                  <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+                  <div class="header">
+                    {{ tag.name }}
+                  </div>
+                  <div class="description">
+                    {{ tag.excerpt }}
+                  </div>
+                </div>
+                <div class="extra content">
+                  <div class="ui labeled button" tabindex="0">
+                    <button class="ui teal button" onClick="onDislikeClick('{{ tag.name }}')"> <i class="empty heart icon"></i> Disike </button>
+                    <a class="ui basic teal left pointing label"> {{ tag.count }} </a>
+                  </div>
+                  <div class="ui labeled button" tabindex="0">
+                    <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
       <div id="NextRowOfCourses"class="row">
         <h3 class="ui header">

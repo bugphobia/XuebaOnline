@@ -77,8 +77,8 @@
                 <div class="field">
                   <label>Birthday</label>
                   <div class="ui basic label">
-                    {% if profile.birthday %}
-                      {{ profile.birthday }}
+                    {% if birthday %}
+                      {{ birthday }}
                     {% else %}
                       None
                     {% endif %}
@@ -104,11 +104,19 @@
                     <div class="three fields">
                       <div class="field">
                         <label>First name</label>
-                        <input placeholder="First Name" type="text" name ="first_name">
+                        {% if user.first_name %}
+                          <input value="{{ user.first_name }}"placeholder="First Name" type="text" name ="first_name">
+                        {% else %}
+                          <input placeholder="First Name" type="text" name ="first_name">
+                        {% endif %}
                       </div>
                       <div class="field">
                         <label>Last name</label>
-                        <input placeholder="Last Name" type="text" name="last_name">
+                        {% if user.last_name %}
+                          <input value="{{ user.last_name }}" placeholder="Last Name" type="text" name="last_name">
+                        {% else %}
+                          <input placeholder="Last Name" type="text" name="last_name">
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -117,7 +125,11 @@
                   <div class="ui form">
                     <div class="field">
                       <label>E-mail</label>
-                      <input placeholder="teamorl@verano.com" type="email" name="email">
+                      {% if user.email %}
+                        <input value="{{ user.email }}" placeholder="example@example.com" type="email" name="email">
+                      {% else %}
+                        <input placeholder="example@example.com" type="email" name="email">
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -125,7 +137,11 @@
                   <div class="ui form">
                     <div class="field">
                       <label>Birthday</label>
-                      <input placeholder="YYYY/MM/DD, only used for displayiing age" type="text" name="birthday">
+                      {% if birthday %}
+                        <input value="{{ birthday }}" placeholder="YYYY/MM/DD, only used for displayiing age" type="text" name="birthday">
+                      {% else %}
+                        <input placeholder="YYYY/MM/DD, only used for displayiing age" type="text" name="birthday">
+                      {% endif %}
                     </div>
                   </div>
                 </div>

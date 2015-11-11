@@ -131,19 +131,9 @@
     <div class="three wide column">
       <div class="ui vertical segment">
         <div class="ui one column padded grid">
-          <div class="red column">Computer</div>
-          <div class="orange column">Function</div>
-          <div class="yellow column">Hello World</div>
-          <div class="olive column">Main</div>
-          <div class="green column">Object</div>
-          <div class="teal column">Python</div>
-          <div class="blue column">Quero</div>
-          <div class="violet column">Satic</div>
-          <div class="purple column">Template</div>
-          <div class="pink column">Union</div>
-          <div class="brown column">Verilog</div>
-          <div class="grey column">Xmind</div>
-          <div class="black column">Yet</div>
+          {% for color,tag in tags %}
+            <div class="{{ color }} column">{{ tag.name }}</div>
+          {% endfor %}
         </div>
       </div>
     </div>
