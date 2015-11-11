@@ -1,0 +1,53 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <style type="text/css">
+  #HeaderOfH1 {
+    margin-top: 3em;
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+  }
+  #HeaderOfH2 {
+    font-size: 1.7em;
+    font-weight: normal;
+  }
+  #ButtonOfTemp {
+    margin-bottom: 14em;
+  }
+  </style>
+
+  <div class="pusher">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <!--Just load for location-->
+    <div class="ui inverted vertical masthead center aligned segment">
+      <div class="ui text container">
+        <h1 class="ui inverted header" id="HeaderOfH1">
+          Search With Tags
+        </h1>
+        <h2 id="HeaderOfH2">Stay tuned for such function.</h2>
+        <div class="ui huge primary button" id="ButtonOfTemp">Back Home <i class="right arrow icon"></i></div>
+      </div>
+
+    </div>
+
+  {% include 'footmenu.djhtml' %}
+
+{% endblock %}
