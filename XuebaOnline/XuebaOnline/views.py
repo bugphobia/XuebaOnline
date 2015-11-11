@@ -18,6 +18,10 @@ def index(request):
     user = get_user(request)
     return render(request, 'index.djhtml', {'user': user})
 
+def feedback(request):
+    user = get_user(request)
+    return render(request, 'feedback.djhtml', {'user': user})
+
 def query(request):
     if request.method == "GET":
         user = get_user(request)
@@ -41,7 +45,6 @@ def query(request):
                     que['ans_num'] = question.answer_set.count()
                     for tag in get_tags_by_questionid(question.question_id):
                         que['tags_name'].append(tag.name)
-                        #print(tag.name)
                     print(len(que['tags_name']))
                     que['tages_name'] = query_content
                     que['title'] = question.title
