@@ -1,5 +1,0 @@
-{% load staticfiles %}
-
-<div class="ui segment">
-	{% include 'question.djhtml' %}
-</div>

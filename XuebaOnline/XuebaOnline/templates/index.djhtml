@@ -109,19 +109,21 @@
       </div>
 
       <div class="ui vertical segment">
-        <div class="ui large fluid search">
-          <div class="ui icon fluid input" style="margin-left: 1em; margin-right: 1em;">
-            <input class="prompt" placeholder="Search..." type="text">
-            <i class="search icon"></i>
+        <form class="ui form" action="/search/query/" method="get">{% csrf_token %}
+          <div class="ui large fluid search">
+            <div class="ui icon fluid input" style="margin-left: 1em; margin-right: 1em;">
+              <input class="prompt" placeholder="Search..." type="text" name="query_content">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
           </div>
-          <div class="results"></div>
-        </div>
-        <div class="ui vertical segment">
-          <button class="ui blue basic button">
-            <i class="icon tag"></i>
-            Search
-          </button>
-        </div>
+          <div class="ui vertical segment">
+            <button class="ui blue basic button submit" type="submit">
+              <i class="icon tag"></i>
+              Search
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 

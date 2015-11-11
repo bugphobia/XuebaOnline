@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^accounts/', include(accounts_urls)),
     url(r'^crawler/', include(crawl_urls)),
     url(r'^display/$', views.test_display_meta),
+    url(r'^search/query/$', views.query),
 ]

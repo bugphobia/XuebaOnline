@@ -8,27 +8,42 @@
       <div class="ui segment" style="margin-left: 1em">
         <div class="ui comments">
           <div class="comment">
+            <div class="content">
+              <div class="text">
+                {{ tag_description }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for question in question_list %}
+    <div class="row">
+      <div class="ui segment" style="margin-left: 1em">
+        <div class="ui comments">
+          <div class="comment">
             <a class="avatar">
               <img src="{% static 'SearchLogo.jpg' %}">
             </a>
             <div class="content">
-              <a class="content">(The Details of the link)Panacea Has Falled in love with teamorl</a>
+              <a class="content" href='{{ question.url }}'> {{ question.title }} </a>
               <div class="metadata">
-                <div class="date">2 days ago</div>
+                <div class="date">{{ question.creation_date }}</div>
                 <div class="rating">
                   <i class="star icon"></i>
-                  5 Faves
+                  {{question.score}} Favor
                 </div>
               </div>
               <div class="text">
-                (The content of the link)Panacea, teamorl, para hojas del verano
+                <!-- Nothing will show for question body -->
               </div>
-              <a class="content">www.teamorl.com</a>
+              <a class="content" href='{{ question.url }}'>{{ question.url }}</a>
               <div class="actions">
                 <a class="reply">Reply</a>
                 <a class="save">Save</a>
                 <a class="hide">Hide</a>
-                <a>
+                <a href='{{ question.url }}'>
                   <i class="expand icon"></i>
                   Full-screen
                 </a>
@@ -38,7 +53,10 @@
         </div>
       </div>
     </div>
+    {% endfor %}
+    
 
+    <!-- This type will show courses
     <div class="row">
       <a class="ui card" style="margin-left: 1em" href="#">
         <div class="content">
@@ -66,6 +84,7 @@
         </div>
       </a>
     </div>
+    -->
   </div>
 
 </div>
