@@ -1,25 +1,25 @@
-<div class="ui segment">
+<div class="ui container">
   <div class="ui two column stackable grid">
     <div class="four wide center aligned middle aligned column">
       <div class="ui three equal width grid">
         <div class="column">
           <div class="ui item">
             <div class="content">
-            <h4 class="ui header">17 <div class="sub header">votes</div> </h4>
+            <h4 class="ui header">{{ question.score }} <div class="sub header">votes</div> </h4>
             </div>
           </div>
         </div>
         <div class="blue column">
           <div class="ui item">
             <div class="content">
-            <h4 class="ui header">7 <div class="sub header">replys</div> </h4>
+            <h4 class="ui header">{{ question.ans_num }} <div class="sub header">replys</div> </h4>
             </div>
           </div>
         </div>
         <div class="column">
           <div class="ui item">
             <div class="content">
-            <h4 class="ui header">117 <div class="sub header">views</div> </h4>
+            <h4 class="ui header">{{ question.view_count }} <div class="sub header">views</div> </h4>
             </div>
           </div>
         </div>
@@ -30,14 +30,15 @@
       <div class="row">
         <h4 class="ui header">
           <i class="announcement icon"></i>
-          <a class="content">How JVM identity regular expression such as @"$teamorl^" in C#'s grammer</a>
+          <a class="content" href={{ question.url }}>{{ question.title }}</a>
         </h4>
       </div>
-      <div class="row" style="margin-top: 0.5em">
-        <a class="ui tag label">JVM</a>
-        <a class="ui tag label">Regex</a>
-        <a class="ui tag label">C#</a>
-        <a class="ui tag label">teamorl</a>
+      <div class="row" style="margin-top: 0.5em">        
+        
+          
+        {% for tagname in question.tags_name %}
+          <a class="ui tag label" href="/search/query/?query_content={{ tagname }}"> {{ tagname }} </a>
+        {% endfor %}
       </div>
     </div>
   

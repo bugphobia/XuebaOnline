@@ -16,6 +16,38 @@
 
   {% load staticfiles %}
 
+  <script type="text/javascript">
+   $(document).ready(function() {
+    $('.menu .item')
+      .tab()
+       ;
+
+     $('.ui.modal')
+        .modal()
+       .modal('setting','onApprove',function(){
+         retobj = $.ajax({
+           async:false,
+           url:'#',
+           method:'post',
+           data:$('#profileForm').serialize(),
+           dataType:"json"
+         });
+
+         var obj=retobj.responseJSON;
+         if (obj.isOK) {
+           return true;
+         } else {
+           return false;
+         }
+       })
+       ;
+
+     $('#editButton').click(function(){
+       $('.ui.modal').modal('show');
+     });
+   });
+  </script>
+
   <div class="pushter">
 
     <!--These Code Should be deleted and be exchanged with css-->
@@ -45,22 +77,24 @@
 
     <div class="ui five column grid">
       <div class="center aligned row" style="margin-bottom: 1em">
-       <div class="three wide column"></div>
-
+       <div class="three wide column"></div>        
         <div class="ten wide column">
-          <div class="ui large fluid search">
-            <img src="{% static 'SearchLogo.jpg' %}" class="ui avatar image">
-            <div class="ui icon input">
-              <input class="prompt" placeholder="Search..." type="text">
-              <i class="search icon"></i>
+
+          <form class="ui form" action="/search/query/" method="get">{% csrf_token %}
+            <div class="ui large fluid search">
+              <img src="{% static 'SearchLogo.jpg' %}" class="ui avatar image">
+              <div class="ui icon input">
+                <input class="prompt" placeholder="{{ query_content }}" type="text" name="query_content">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+              <button class="ui blue basic button" style="margin-left: 2em">
+                <i class="icon tag"></i>
+                Search
+              </button>
             </div>
-            <div class="results"></div>
-            <button class="ui blue basic button" style="margin-left: 2em">
-              <i class="icon tag"></i>
-              Search
-            </button>
-          </div>
-         </div>
+          </form>
+        </div>
        <div class="three wide column"></div>
       </div>
 
@@ -75,17 +109,17 @@
           </div>
         </div>
         <div class="eleven wide column">
-          <div class="ui bottom attached active tab segment" data-tab="first">
-            {% include 'Search_Link.djhtml' %}
+          <div class="ui bottom attached tab active segment" data-tab="first">
+            {% include 'search/Search_Link.djhtml' %}
           </div>
           <div class="ui bottom attached tab segment" data-tab="second">
-            {% include 'Search_Courses.djhtml' %}
+            {% include 'search/Search_Courses.djhtml' %}
           </div>
           <div class="ui bottom attached tab segment" data-tab="third">
-            {% include 'Search_Questions.djhtml' %}
+            {% include 'search/Search_Questions.djhtml' %}
           </div>
           <div class="ui bottom attached tab segment" data-tab="fourth">
-            {% include 'Search_Other.djhtml' %}
+            {% include 'search/Search_Other.djhtml' %}
           </div>
         </div>
         <div class="two wide column"></div>

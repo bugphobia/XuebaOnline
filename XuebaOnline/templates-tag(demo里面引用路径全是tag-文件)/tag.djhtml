@@ -1,0 +1,133 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <script type="text/javascript">
+   $(document).ready(function() {
+    $('.menu .item')
+      .tab()
+       ;
+
+     $('.ui.modal')
+        .modal()
+       .modal('setting','onApprove',function(){
+         retobj = $.ajax({
+           async:false,
+           url:'#',
+           method:'post',
+           data:$('#profileForm').serialize(),
+           dataType:"json"
+         });
+
+         var obj=retobj.responseJSON;
+         if (obj.isOK) {
+           return true;
+         } else {
+           return false;
+         }
+       })
+       ;
+
+     $('#editButton').click(function(){
+       $('.ui.modal').modal('show');
+     });
+   });
+  </script>
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <!--Just load for location-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">User</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="ui five column grid">
+      <div class="center aligned row" style="margin-bottom: 1em">
+       <div class="three wide column"></div>        
+        <div class="ten wide column">
+
+          <form class="ui form" action="/search/query/" method="get">{% csrf_token %}
+            <div class="ui large fluid search">
+              <img src="{% static 'SearchLogo.jpg' %}" class="ui avatar image">
+              <div class="ui icon input">
+                <input class="prompt" placeholder="{{ query_content }}" type="text" name="query_content">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+              <button class="ui blue basic button" style="margin-left: 2em">
+                <i class="icon tag"></i>
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+       <div class="three wide column"></div>
+      </div>
+
+      <div class="row">
+        <div class="one wide column"></div>
+        <div class="two wide center aligned column">
+          <div class="ui fluid vertical menu">
+            <a class="active item" data-tab="first"> <i class="angle right icon"></i> Top Questions </a>
+            <a class="item" data-tab="second"> <i class="angle right icon"></i> Top Answers </a>
+            <a class="item" data-tab="third"> <i class="angle right icon"></i> Courses </a>
+            <a class="item" data-tab="fourth"> <i class="angle right icon"></i> Other </a>
+          </div>
+        </div>
+        <div class="eleven wide column">
+          <div class="ui bottom attached tab active container" data-tab="first">
+            {% include 'tag/Tag_TopAnswers.djhtml' %}
+          </div>
+          <div class="ui bottom attached tab container" data-tab="second">
+            {% include 'tag/Tag_TopQuestions.djhtml' %}
+          </div>
+          <div class="ui bottom attached tab container" data-tab="third">
+            {% include 'tag/Tag_Courses.djhtml' %}
+          </div>
+          <div class="ui bottom attached tab container" data-tab="fourth">
+            {% include 'tag/Tag_Other.djhtml' %}
+          </div>
+        </div>
+        <div class="two wide column"></div>
+      </div>
+
+    </div>
+    {% include 'footmenu.djhtml' %}
+
+  </div>
+
+{% endblock %}

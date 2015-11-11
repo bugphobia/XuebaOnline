@@ -1,0 +1,66 @@
+{% load staticfiles %}
+
+<div class="ui segment">
+  <div class="ui cards">
+    <div class="card">
+      <div class="content">
+        <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+        <div class="header">
+          Compiler
+        </div>
+        <div class="description">
+          A compiler is a computer programthat transforms source code...
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui red button"> <i class="heart icon"></i> Like </div>
+          <a class="ui basic red left pointing label"> 17 </a>
+        </div>
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="content">
+        <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+        <div class="header">
+          Teamorl
+        </div>
+        <div class="description">
+          Para Hojas del Verano, Te Conozco
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui red button"> <i class="heart icon"></i> Like </div>
+          <a class="ui basic red left pointing label"> 17 </a>
+        </div>
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="content">
+        <img class="right floated mini ui image" src="{% static 'SearchLogo.jpg' %}">
+        <div class="header">
+          Data
+        </div>
+        <div class="description">
+          Data is a set of values of qualitative or quantitative variables
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui red button"> <i class="heart icon"></i> Like </div>
+          <a class="ui basic red left pointing label"> 17 </a>
+        </div>
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui basic blue button"> <i class="fork icon"></i> Details </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
