@@ -1,0 +1,6 @@
+{% load staticfiles %}
+{% for question in question_list %}
+	<div class="ui segment">
+		{% include 'question.djhtml' %}
+	</div>
+{% endfor %}
