@@ -25,16 +25,16 @@
 <style type="text/css">
 body {background: #fff url() no-repeat center 230px;}
 #div1 {position:relative; width:450px; height:450px; margin: 20px auto 0; }
-#div1 a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:#fff; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#div1 a {position:absolute; top:0px; left:0px; font-family: Times New Roman; color:#fff; font-weight:bold; text-decoration:none; padding: 3px 6px; }
 #div1 a:hover {border: 1px solid #eee; background: #000; }
-#div1 .blue {color:blue;}
-#div1 .red {color:red;}
-#div1 .yellow {color:yellow;}
-#div1 .green {color:green;}
-#div1 .purple {color:purple;}
-#div1 .pink {color : pink;}
-p { font: 16px Microsoft YaHei; text-align: center; color: #ba0c0c; }
-p a { font-size: 14px; color: #ba0c0c; }
+#div1 .blue {color:#0066CC;}
+#div1 .red {color:#cc33cc;}
+#div1 .yellow {color:#FF3300;}
+#div1 .green {color:#3399FF;}
+#div1 .purple {color:#660099;}
+#div1 .pink {color : #CC00FF;}
+p { font: Times New Roman; text-align: center; color: #ba0c0c; }
+p a { font-size: 16px; color: #ba0c0c; }
 p a:hover { color: red; }
 </style>
 
@@ -48,7 +48,7 @@ var active = false;
 var lasta = 1;
 var lastb = 1;
 var distr = true;
-var tspeed=2;
+var tspeed=1;
 var size=250;
 
 var mouseX=0;
@@ -381,7 +381,14 @@ function sineCosine( a, b, c)
           <a href="http://10.2.26.67:8080/solr" class="green">C</a>
           <a href="http://10.2.26.67:8080/solr" class="red">C#</a>
           <a href="http://10.2.26.67:8080/solr" class="blue">VB</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">Solr</a>
+          <a href="http://10.2.26.67:8080/solr" class="red">RSA</a>
+          <a href="http://10.2.26.67:8080/solr" class="purple">Pascal</a>
+          <a href="http://10.2.26.67:8080/solr" class="yellow">scrapy</a>
+          <a href="http://10.2.26.67:8080/solr" class="blue">Lisp</a>
+          <a href="http://10.2.26.67:8080/solr" class="red">matlab</a>
+          <a href="http://10.2.26.67:8080/solr" class="pink">TCP</a>
+          <a href="http://10.2.26.67:8080/solr" class="red">jre</a>
+          <a href="http://10.2.26.67:8080/solr" class="pink">VS</a>
         </div>
         <h2 class="ui header">
           <div class="content">
