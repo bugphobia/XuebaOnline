@@ -16,14 +16,25 @@
 
   {% load staticfiles %}
 
-
+<style type="text/css">
   video#bgvideo {
-    position: fixed; right: 0; bottom: 0;
-    min-width: 100%; min-height: 100%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
     width: auto; height: auto; z-index: -100;
     background: url(polina.jpg) no-repeat;
     background-size: cover; 
 }
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#VideoCSS').css('height',$('#EMBEDCSS').css('height'));
+  $('#VideoCSS').css('width',$('#EMBEDCSS').css('width'));
+})
+</script>
 
   <div class="pushter">
 
@@ -80,20 +91,18 @@
         <div class="eight wide column">
           <div class="ui header"> <i class="film icon"></i> Video</div>
           <!--data-url="http://music.163.com/#/mv?id=480329"-->
-          <div class="ui embed"  data-url="http://music.163.com/#/mv?id=480329" data-placeholder="{% static 'test.jpg' %}" data-icon="right circle play">
+          <div class="ui embed"  data-url="http://music.163.com/#/mv?id=480329" data-placeholder="{% static 'test.jpg' %}" data-icon="right circle play" id="EMBEDCSS">
 
           <!--video grid-->
           <!--modified 11.16-->
-          <video controls="controls" style="width: auto; height: auto;">
+          <video controls="controls" id="VideoCSS">
               Your browser does not support the video tag.
               <source src="http://sighingnow.github.io/resource/web_video_background/polina.webm" type="video/webm">
               <source src="http://sighingnow.github.io/resource/web_video_background/polina.mp4" type="video/mp4">
           </video>
           </div>
-
-          
-
         </div>
+
         <div class="five wide column">
           <div class="ui header"> <i class="edit icon"></i> Info</div>
           <table class="ui very basic collapsing celled table">
