@@ -93,6 +93,14 @@ def robot_contact(request):
     print(text)
     return JsonResponse(rsp)
 
+def course(request):
+    user = get_user(request)
+    return render(request,'course/home.djhtml',{'user':user})
+
+def courseCompiler(request):
+    user = get_user(request)
+    return render(request,'course/index.html')
+
 def test_display_meta(request):
     values = request.META.items()
     html = []

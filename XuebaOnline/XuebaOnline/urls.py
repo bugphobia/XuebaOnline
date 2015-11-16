@@ -13,6 +13,7 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
 from django.conf.urls import include, url
 from django.contrib import admin
 from . import views
@@ -30,5 +31,7 @@ urlpatterns = [
     url(r'^search/query/$', views.query),
     url(r'^feedback/$', views.feedback),
     url(r'^robot/$', views.robot),
-    url(r'^robot/contact', views.robot_contact, name='robot_contact')
+    url(r'^robot/contact', views.robot_contact, name='robot_contact'),
+    url(r'^course/$', views.course),
+    url(r'^course/compiler/$', views.courseCompiler),
 ]
