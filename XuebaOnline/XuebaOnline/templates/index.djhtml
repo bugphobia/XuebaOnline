@@ -356,39 +356,39 @@ function sineCosine( a, b, c)
     <div class="six wide middle aligned center aligned column">
       <div class="ui vertical segment">
         <div id="div1">
-          <a href="http://10.2.26.67:8080/solr" class="blue">Haskell</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">OO</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">OS</a>
-          <a href="http://10.2.26.67:8080/solr" class="yellow">compiler</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">C++</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">Ruby</a>
-          <a href="http://10.2.26.67:8080/solr" class="green">Tex</a>
-          <a href="http://10.2.26.67:8080/solr" class="yellow">JS</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">JVM</a>
-          <a href="http://10.2.26.67:8080/solr" class="green">CSS</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">Android</a>
-          <a href="http://10.2.26.67:8080/solr" class="yellow">class</a>
-          <a href="http://10.2.26.67:8080/solr" class="green">Mips</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">x86</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">ARM</a>
-          <a href="http://10.2.26.67:8080/solr" class="yellow">XHTML</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">MySQL</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">jQuery</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">Java</a>
-          <a href="http://10.2.26.67:8080/solr" class="yellow">Python</a>
-          <a href="http://10.2.26.67:8080/solr" class="pink">Bigdata</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">Linux</a>
-          <a href="http://10.2.26.67:8080/solr" class="green">C</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">C#</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">VB</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">RSA</a>
-          <a href="http://10.2.26.67:8080/solr" class="purple">Pascal</a>
-          <a href="http://10.2.26.67:8080/solr" class="yellow">scrapy</a>
-          <a href="http://10.2.26.67:8080/solr" class="blue">Lisp</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">matlab</a>
-          <a href="http://10.2.26.67:8080/solr" class="pink">TCP</a>
-          <a href="http://10.2.26.67:8080/solr" class="red">jre</a>
-          <a href="http://10.2.26.67:8080/solr" class="pink">VS</a>
+          <a href="http://10.2.26.67/search/query?query_content=Haskell" class="blue">Haskell</a>
+          <a href="http://10.2.26.67/search/query?query_content=object-oriented" class="red">OO</a>
+          <a href="http://10.2.26.67/search/query?query_content=os" class="blue">OS</a>
+          <a href="http://10.2.26.67/search/query?query_content=compiler">compiler</a>
+          <a href="http://10.2.26.67/search/query?query_content=c++" class="blue">C++</a>
+          <a href="http://10.2.26.67/search/query?query_content=ruby" class="red">Ruby</a>
+          <a href="http://10.2.26.67/search/query?query_content=tex" class="green">Tex</a>
+          <a href="http://10.2.26.67/search/query?query_content=javascript" class="yellow">JS</a>
+          <a href="http://10.2.26.67/search/query?query_content=jvm" class="red">JVM</a>
+          <a href="http://10.2.26.67/search/query?query_content=css" class="green">CSS</a>
+          <a href="http://10.2.26.67/search/query?query_content=Android" class="blue">Android</a>
+          <a href="http://10.2.26.67/search/query?query_content=class" class="yellow">class</a>
+          <a href="http://10.2.26.67/search/query?query_content=mips" class="green">Mips</a>
+          <a href="http://10.2.26.67/search/query?query_content=x86" class="red">x86</a>
+          <a href="http://10.2.26.67/search/query?query_content=ARM" class="blue">ARM</a>
+          <a href="http://10.2.26.67/search/query?query_content=XHTML" class="yellow">XHTML</a>
+          <a href="http://10.2.26.67/search/query?query_content=MySQL" class="blue">MySQL</a>
+          <a href="http://10.2.26.67/search/query?query_content=jQuery" class="red">jQuery</a>
+          <a href="http://10.2.26.67/search/query?query_content=java" class="blue">Java</a>
+          <a href="http://10.2.26.67/search/query?query_content=Pyhton" class="yellow">Python</a>
+          <a href="http://10.2.26.67/search/query?query_content=bigdata" class="pink">Bigdata</a>
+          <a href="http://10.2.26.67/search/query?query_content=Linux" class="blue">Linux</a>
+          <a href="http://10.2.26.67/search/query?query_content=C" class="green">C</a>
+          <a href="http://10.2.26.67/search/query?query_content=C#" class="red">C#</a>
+          <a href="http://10.2.26.67/search/query?query_content=VB" class="blue">VB</a>
+          <a href="http://10.2.26.67/search/query?query_content=RSA" class="red">RSA</a>
+          <a href="http://10.2.26.67/search/query?query_content=pascal" class="purple">Pascal</a>
+          <a href="http://10.2.26.67/search/query?query_content=scrapy" class="yellow">scrapy</a>
+          <a href="http://10.2.26.67/search/query?query_content=Lisp" class="blue">Lisp</a>
+          <a href="http://10.2.26.67/search/query?query_content=matlab" class="red">matlab</a>
+          <a href="http://10.2.26.67/search/query?query_content=TCP" class="pink">TCP</a>
+          <a href="http://10.2.26.67/search/query?query_content=jre" class="red">jre</a>
+          <a href="http://10.2.26.67/search/query?query_content=VS" class="pink">VS</a>
         </div>
         <h2 class="ui header">
           <div class="content">
