@@ -84,7 +84,7 @@
 
           <!--video grid-->
           <!--modified 11.16-->
-          <video controls="controls" width="636" height="357">
+          <video controls="controls" style="width: auto; height: auto;">
               Your browser does not support the video tag.
               <source src="http://sighingnow.github.io/resource/web_video_background/polina.webm" type="video/webm">
               <source src="http://sighingnow.github.io/resource/web_video_background/polina.mp4" type="video/mp4">

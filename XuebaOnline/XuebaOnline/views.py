@@ -99,7 +99,7 @@ def course(request):
 
 def courseCompiler(request):
     user = get_user(request)
-    return render(request,'course/index.html')
+    return render(request,'course/pdfshow.djhtml')
 
 def test_display_meta(request):
     values = request.META.items()
