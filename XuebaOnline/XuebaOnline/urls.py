@@ -22,6 +22,7 @@ from accounts import urls as accounts_urls
 from stackExchange import urls as crawl_urls
 
 urlpatterns = [
+    url(r'^new/$',views.static_page,{'template_name':'xuebaonline.html'}),
     url(r'^/{0,1}$',views.index),
     url(r'^index/$', views.index),
     url(r'^admin/', include(admin.site.urls)),
