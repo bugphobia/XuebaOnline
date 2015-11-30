@@ -21,3 +21,16 @@ Facebook官方的Flux实现并不是大家首推的Flux实现。我们选择了�
 所以，接下来，我们还需要按照Alt
 
     npm install --save-dev alt
+
+# 运行 #
+编译采用
+
+    ./node_modules/.bin/webpack --config webpack.config.js
+
+实时编译（hot load，即无需刷新网页即可看到效果变化）
+
+    node server.js
+
+Django运行
+
+    python3 manage.py runserver
