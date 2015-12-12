@@ -66,3 +66,6 @@ node_modules/
 semantic/dist
 semantic/tasks
 semantic/gulpfile.js
+*/assets/bundles/
+*webpack-stats.json
+.directory

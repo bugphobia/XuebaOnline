@@ -7,7 +7,7 @@ module.exports = {
   entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      './assets/js/index'
+      './assets/xuebaonline/app'
   ],
 
   output: {
@@ -36,6 +36,10 @@ module.exports = {
         },
         {
             test: /\.png$/,
+            loader: "file-loader"
+        },
+        {
+            test: /\.jpg$/,
             loader: "file-loader"
         },
         {

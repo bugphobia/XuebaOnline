@@ -28,9 +28,9 @@ def index(request):
     tags = Tag.objects.all().order_by('-count')[0:len(tags_color)]
     if get_user(request) is not None:
         user = get_user(request)
-        return HttpResponse(loader.get_template('index.djhtml').render(Context({"user": user,'tags':zip(tags_color,tags)})))
+        return HttpResponse(loader.get_template('index.djhtml').render(RequestContext(request,{"user": user,'tags':zip(tags_color,tags)})))
     else:
-        return HttpResponse(loader.get_template('index.djhtml').render(Context({'tags':zip(tags_color,tags)})))
+        return HttpResponse(loader.get_template('index.djhtml').render(RequestContext(request,{'tags':zip(tags_color,tags)})))
 
 def feedback(request):
     user = get_user(request)
