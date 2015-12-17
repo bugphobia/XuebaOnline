@@ -6,7 +6,8 @@
 
     npm install --save-dev react react-dom
     npm install --save semantic-ui
-    npm install --save-dev webpack webpack-bundle-tracker babel babel-loader babel-core babel-preset-es2015 babel-preset-react css-loader style-loader file-loader  
+    npm install --save-dev webpack webpack-bundle-tracker babel babel-loader babel-core babel-preset-es2015 babel-preset-react css-loader style-loader file-loader 
+    npm install --save react-tagcloud marked
 
 安装Webpack与Django的整合
 

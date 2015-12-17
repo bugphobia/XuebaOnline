@@ -2,9 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Index from './components/index'
 import Tuned from './components/tuned'
+import FootMenu from './components/footmenu'
 import Register from './components/register'
 import Login from './components/login'
+import FeedBack from './components/feedback'
 import PageStore from './stores/PageStore'
+import WindowStore from './stores/WindowStore'
+import ResizeActions from './actions/ResizeActions'
 
 window.jQuery = window.$ = require('./jquery.js');
 var s = require('./semantic.js');
@@ -14,12 +18,19 @@ export default class App extends React.Component {
     super(props);
     this.state = PageStore.getState();
     this.onChange = this.onChange.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+  }
+  handleResize(e)
+  {
+    ResizeActions.WindowResized(window.innerWidth,window.innerHeight);
   }
   componentDidMount() {
     PageStore.listen(this.onChange);
+    window.addEventListener('resize', this.handleResize);
   }
   componentWillUnmount() {
     PageStore.unlisten(this.onChange);
+    window.removeEventListener('resize', this.handleResize);
   }
   onChange(state) {
     this.setState(state);
@@ -27,20 +38,38 @@ export default class App extends React.Component {
   render() {
     if (this.state.currentPage == "index") {
       return (
-        <Index/>
+        <div>
+          <Index/>
+          <FootMenu/>
+        </div>
       );
     } else if (this.state.currentPage == "register") {
       return (
-        <Register/>
+        <div>
+          <Register/>
+          <FootMenu/>
+        </div>
       );
     } else if (this.state.currentPage == "login") {
       return (
-        <Login/>
+        <div>
+          <Login/>
+          <FootMenu/>
+        </div>
       );
-    }
-    else {
+    } else if (this.state.currentPage == 'feedback') {
       return (
-        <Tuned/>
+        <div>
+          <FeedBack/>
+          <FootMenu/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Tuned/>
+          <FootMenu/>
+        </div>
       );
     }
   }

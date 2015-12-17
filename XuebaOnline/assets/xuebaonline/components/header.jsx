@@ -84,15 +84,25 @@ export default class RealHeader extends React.Component{
 
 export default class Header extends React.Component{
   render() {
-    return (
-      <div>
-        <div className="ui stackable top inverted menu">
-          <RealHeader/>
+    if(this.props.needPadding != false){
+      return (
+        <div>
+          <div className="ui stackable top inverted menu">
+            <RealHeader/>
+          </div>
+          <div className="ui fixed stackable top inverted menu">
+            <RealHeader/>
+          </div>
         </div>
-        <div className="ui fixed stackable top inverted menu">
-          <RealHeader/>
+      );
+    } else {
+      return (
+        <div>
+          <div className="ui fixed stackable top inverted menu">
+            <RealHeader/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
