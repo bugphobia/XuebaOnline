@@ -12,7 +12,6 @@ from urllib.request import urlopen
 from urllib.parse import urlencode
 import json
 
-
 from stackExchange.models import Tag
 
 def static_page(request,template_name):
