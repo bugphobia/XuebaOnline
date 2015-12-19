@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader, Context
 import json
 
@@ -20,6 +20,12 @@ class ProfileForm(forms.Form):
     email = forms.EmailField(required=False)
     birthday = forms.DateField(required=False,input_formats=['%Y/%m/%d'])
 
+
+# This functions used for user's adding follew to a tag
+# The return state: 'ok' or 'failed'
+# If the state is ok:
+# Front end can get more infomation about the user's saved tags
+# The attributes can see below
 @login_required
 def like_tag(request):
     user = get_user(request)
@@ -32,17 +38,23 @@ def like_tag(request):
             profile.saved_tags.add(tag)
             profile.save()
         except:
-            # nothing to do
+            JsonResponse({'state':'failed'})
             pass
-    return HttpResponse(loader.get_template('ProfilePage.djhtml').render(
-        RequestContext(request,
-                       {'user':user,'profile':profile,'tags':tags,
-                        'saved_tags':profile.saved_tags.all(),
-                        'saved_tags_count':profile.saved_tags.count(),
-                        'questions_count':profile.questions.count(),
-                        'answers_count':profile.questions.count(),
-                        'created_days':(datetime.date.today()-profile.creation_date).days})))
+    return JsonResponse({'state': 'ok',
+                         'user':user,
+                         'profile':profile,
+                         'tags':tags,
+                         'saved_tags':profile.saved_tags.all(),
+                         'saved_tags_count':profile.saved_tags.count(),
+                         'questions_count':profile.questions.count(),
+                         'answers_count':profile.questions.count(),
+                         'created_days':(datetime.date.today()-profile.creation_date).days})
 
+# This functions used for user's cancel follew to a tag
+# The return state: 'ok' or 'failed'
+# If the state is ok:
+# Front end can get more infomation about the user's saved tags
+# The attributes can see below   
 @login_required
 def dislike_tag(request):
     user = get_user(request)
@@ -55,17 +67,23 @@ def dislike_tag(request):
             profile.saved_tags.remove(tag)
             profile.save()
         except:
-            # nothing to do
+            JsonResponse({'state':'failed'})
             pass
-    return HttpResponse(loader.get_template('ProfilePage.djhtml').render(
-        RequestContext(request,
-                       {'user':user,'profile':profile,'tags':tags,
-                        'saved_tags':profile.saved_tags.all(),
-                        'saved_tags_count':profile.saved_tags.count(),
-                        'questions_count':profile.questions.count(),
-                        'answers_count':profile.questions.count(),
-                        'created_days':(datetime.date.today()-profile.creation_date).days})))
-    
+    return JsonResponse({'state': 'ok',
+                         'user':user,
+                         'profile':profile,
+                         'tags':tags,
+                         'saved_tags':profile.saved_tags.all(),
+                         'saved_tags_count':profile.saved_tags.count(),
+                         'questions_count':profile.questions.count(),
+                         'answers_count':profile.questions.count(),
+                         'created_days':(datetime.date.today()-profile.creation_date).days})
+
+# This functions used for getting tags
+# The return state: 'ok' or 'failed'
+# If the state is ok:
+# Front end can get more infomation about the user's saved tags
+# The attributes can see below  
 @login_required
 def get_tags(request):
     startPos = request.session['tagStartPos']
@@ -79,21 +97,24 @@ def get_tags(request):
     request.session['tagLastStartPos'] = startPos
     user = get_user(request)
     profile = user.userprofile
-    return HttpResponse(loader.get_template('ProfilePage.djhtml').render(
-        RequestContext(request,
-                       {'user':user,'profile':profile,'tags':tags,
-                        'saved_tags':profile.saved_tags.all(),
-                        'saved_tags_count':profile.saved_tags.count(),
-                        'questions_count':profile.questions.count(),
-                        'answers_count':profile.questions.count(),
-                        'created_days':(datetime.date.today()-profile.creation_date).days})))
+    return JsonResponse({'state': 'ok',
+                         'user':user,
+                         'profile':profile,
+                         'tags':tags,
+                         'saved_tags':profile.saved_tags.all(),
+                         'saved_tags_count':profile.saved_tags.count(),
+                         'questions_count':profile.questions.count(),
+                         'answers_count':profile.questions.count(),
+                         'created_days':(datetime.date.today()-profile.creation_date).days})
 
+# This function used for getting some setted informations
 @login_required
 def get_settings(request):
     user = get_user(request)
     profile = user.userprofile
-    return HttpResponse(loader.get_template('Settings.djhtml').render(
-        RequestContext(request,{'user':user,'profile':profile,'birthday':profile.birthday.strftime('%Y/%m/%d')})))
+    return JsonResponse({'user':user,
+                         'profile':profile,
+                         'birthday':profile.birthday.strftime('%Y/%m/%d')})
     
 @login_required
 def home(request):
@@ -121,16 +142,25 @@ def home(request):
     request.session['tagStartPos'] = 2
     tags = Tag.objects.all()[0:2]
     
-    return HttpResponse(loader.get_template('home.djhtml').render(
-        RequestContext(request,
-                       {"user": user,"profile": profile,'tags':tags,
-                        'birthday':profile.birthday.strftime('%Y/%m/%d'),
-                        'saved_tags':profile.saved_tags.all(),
-                        'saved_tags_count':profile.saved_tags.count(),
-                        'questions_count':profile.questions.count(),
-                        'answers_count':profile.questions.count(),
-                        'created_days':(datetime.date.today()-profile.creation_date).days})))
+    return JsonResponse({'user': user,
+                         'profile': profile,
+                         'tags':tags,
+                         'birthday':profile.birthday.strftime('%Y/%m/%d'),
+                         'saved_tags':profile.saved_tags.all(),
+                         'saved_tags_count':profile.saved_tags.count(),
+                         'questions_count':profile.questions.count(),
+                         'answers_count':profile.questions.count(),
+                         'created_days':(datetime.date.today()-profile.creation_date).days})))
 
+# This function is used for user's regest:
+# If the request.method == GET, means don't carry any info.
+# The return state
+#       "ok"     :   regest success
+#       "fail"   :   the infomation has error, need refill the info
+# The error infomation
+#       Through 'errors', front end can get the error info. 
+# Warming!
+# Compared with the alpha version, we don't have redirect logic here. 
 def signup(request):
     if request.method == 'POST':
         errors = list()
@@ -158,17 +188,23 @@ def signup(request):
                     profile = UserProfile()
                     profile.user = user
                     profile.save()
-                    return redirect(signin,is_new_user=True)
+                    return JsonResponse({'state':'ok', 'is_new_user':True})
                 else:
                     print(User.objects.filter(username=request.POST['username']))
                     errors.append('The username have already been used')
         for error in errors:
             print(error)
-        return render(request,
-                      'signup.djhtml',
-                      RequestContext(request,{'errors':errors}))
+        return JsonResponse({'state':'failed', 'errors' : error})
     return render(request,'signup.djhtml',RequestContext(request))
 
+
+# This function used for user's login
+# If the request.method == GET, means don't carry any info.
+# The return state
+#       "ok"     :   login success 
+#       "missing":   don't have such a user or wrong password
+#       "failed" :   other errors
+# The return is_new_user: true or false
 def signin(request,is_new_user):
     if request.method == 'POST':
         username = ""
@@ -176,30 +212,75 @@ def signin(request,is_new_user):
         try:
             username = request.POST['username']
             password = request.POST['password']
-            # print(username,password)
         except:
-            return render(request,
-                          'signin.djhtml',
-                          RequestContext(request,{'new':is_new_user,'errormsg':"Missing username or password"}))
+            return JsonResponse({'state':'failed', 'is_new_user': is_new_user})
         user = authenticate(username=username,password=password)
-        # print(user)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('/accounts/')
+                return JsonResponse({'state':'ok', 'is_new_user': is_new_user})
             else:
-                return render(request,
-                          'signin.djhtml',
-                          RequestContext(request,{'new':is_new_user,'errormsg':"Disabled account"}))
+                return JsonResponse({'state':'failed', 'is_new_user': is_new_user})
         else:
-            return render(request,
-                          'signin.djhtml',
-                          RequestContext(request,{'new':is_new_user,'errormsg':"Wrong username or password"}))
+            return JsonResponse({'state':'missing', 'is_new_user': is_new_user})
     return render(request,
                   'signin.djhtml',
                   RequestContext(request,{'new':is_new_user}))
 
+
+# This function used for user's logout
+# logout button will show only when the user has logged in, so logout is sure to success.
 def logout_view(request):
     logout(request)
-    return redirect('/index/')
+    return JsonResponse({'state':'ok'})
+
+
+# This function used for update the user infomation
+# Cause user is no need to give all informations
+# So we just get the info been posted
+# Warming!
+# The setting information is disharmony between database and interface, may have error.
+@login_required
+def updateprofile(request):
+    if request.method == 'POST':
+        email = ""
+        realname = ""
+        description = ""
+        try:
+            email = request.POST['email']
+            realname = request.POST['realname']
+            description = request.POST['description']
+        except:
+            pass
+        user = get_user(request)
+        profile = user.userprofile
+        user.email = email
+        user.first_name = realname
+        user.save()
+        profile.display = description
+        profile.save();
+        return JsonResponse({'state':'ok'})
+
+
+# This function is for getting infomation about the user
+# Warming!
+# The setting information is disharmony between database and interface, may have error.
+@login_required
+def userinfo(request):
+    user = get_user(request)
+    profile = user.userprofile
+    return JsonResponse({'state': 'ok',
+                         'user':user,
+                         'profile':profile,
+                         'saved_tags':profile.saved_tags.all(),
+                         'saved_tags_count':profile.saved_tags.count(),
+                         'questions_count':profile.questions.count(),
+                         'answers_count':profile.questions.count(),
+                         'created_days':(datetime.date.today()-profile.creation_date).days})
+
+
+
+
+
+
 
