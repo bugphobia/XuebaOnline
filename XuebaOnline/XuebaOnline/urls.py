@@ -20,6 +20,7 @@ from . import views
 
 from accounts import urls as accounts_urls
 from stackExchange import urls as crawl_urls
+from question import urls as question_urls
 
 urlpatterns = [
     url(r'^new/$',views.static_page,{'template_name':'xuebaonline.html'}),
@@ -35,4 +36,5 @@ urlpatterns = [
     url(r'^robot/contact', views.robot_contact, name='robot_contact'),
     url(r'^course/$', views.course),
     url(r'^course/compiler/$', views.courseCompiler),
+    url(r'^question/', include(question_urls)),
 ]
