@@ -6,10 +6,10 @@
 
 + 首先访问[Node.js的Download页面](https://nodejs.org/en/download/)，这里笔者推荐下载`Windows Installer (.msi)`类型的文件下载，直接依据默认的安装目录完成安装即可
 
-![Node.js下载页面图例(Windows)]()
+![Node.js下载页面图例(Windows)](https://raw.githubusercontent.com/bugphobia/XuebaOnline/master/documents/Alpha%20Version/Picture%20Environment/Nodejs下载页面.png)
 
 > 特别说明，安装时需要确保npm同时被正确安装如下图所示:
-![npm安装确认图例]()
+![npm安装确认图例](https://raw.githubusercontent.com/bugphobia/XuebaOnline/master/documents/Alpha%20Version/Picture%20Environment/npm安装确定页面.png)
 
 + 若选择下载`Windows Binary (.exe)`类型的文件，则需要手动下载npm并手动设置环境变量，因此笔者这里给出一定的参考链接：[二进制文件的Windows平台安装过程详解](http://blog.csdn.net/bushizhuanjia/article/details/7915017)
 
@@ -17,7 +17,7 @@
 
 + 首先访问[Node.js的Download页面](https://nodejs.org/en/download/)，这里笔者特别说明，Linux平台可以选择`Linux Binaries (.tar.gz)`类型文件或者`Source Code`类型文件进行安装，在后面会对这两者进行区分
 
-![Node.js下载页面图例(Linux)]
+![Node.js下载页面图例(Linux)](https://raw.githubusercontent.com/bugphobia/XuebaOnline/master/documents/Alpha%20Version/Picture%20Environment/Linux平台安装说明.png)
 
 ### Linux Binaries (.tar.gz) ###
 
