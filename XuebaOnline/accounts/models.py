@@ -14,3 +14,5 @@ class UserProfile(models.Model):
     saved_tags = models.ManyToManyField(Tag)
     questions = models.ManyToManyField(Question)
     answers = models.ManyToManyField(Answer)
+    credit = models.IntegerField()
+    download = models.IntegerField()
