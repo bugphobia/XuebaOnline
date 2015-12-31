@@ -1,5 +1,6 @@
 import React from 'react';
 import "../semantic.css";
+import UserStore from '../stores/UserStore';
 import PageStore from '../stores/PageStore';
 import JumpPageActions from '../actions/JumpPageActions';
 
@@ -30,14 +31,25 @@ export default class HeaderButton extends React.Component{
 export default class RealHeader extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {active: PageStore.getState().currentPage};
+    this.state = {
+      active: PageStore.getState().currentPage,
+      isLogin:UserStore.getState().isLogin,
+      user_name:UserStore.getState().user_name
+    };
     this.onPageChange = this.onPageChange.bind(this);
+    this.onUserChange = this.onUserChange.bind(this);
   }
   componentDidMount() {
     PageStore.listen(this.onPageChange);
+    UserStore.listen(this.onUserChange);
   }
   componentWillUnmount() {
+    UserStore.listen(this.onUserChange);
     PageStore.unlisten(this.onPageChange);
+  }
+  onUserChange(state) {
+    this.state.isLogin = state.isLogin;
+    this.state.user_name = state.user_name;
   }
   onPageChange(state) {
     this.state = {active:PageStore.getState().currentPage};

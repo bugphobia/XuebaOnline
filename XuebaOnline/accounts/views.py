@@ -150,7 +150,7 @@ def home(request):
                          'saved_tags_count':profile.saved_tags.count(),
                          'questions_count':profile.questions.count(),
                          'answers_count':profile.questions.count(),
-                         'created_days':(datetime.date.today()-profile.creation_date).days})))
+                         'created_days':(datetime.date.today()-profile.creation_date).days})
 
 # This function is used for user's regest:
 # If the request.method == GET, means don't carry any info.
@@ -194,7 +194,7 @@ def signup(request):
                     errors.append('The username have already been used')
         for error in errors:
             print(error)
-        return JsonResponse({'state':'failed', 'errors' : error})
+        return JsonResponse({'state':'failed', 'errors' : errors})
     return render(request,'signup.djhtml',RequestContext(request))
 
 
