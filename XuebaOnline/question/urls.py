@@ -4,10 +4,10 @@ from . import views
 # Create your views here.
 
 urlpatterns = [
-    url(r'^getUnsolvedQuestions$', views.getUnservedQuestions),
+    url(r'^getUnsolvedQuestions$', views.getUnsolvedQuestions),
     url(r'^getHotQuestions$', views.getHotQuestions),
     url(r'^getMyQuestions$', views.getMyQuestions),
-    url(r'^getQuestionById$', views.getUnservedQuestions),
+    url(r'^getQuestionById$', views.getUnsolvedQuestions),
     url(r'^addQuestion$', views.addQuestion),
     url(r'^addView$', views.addView),
     url(r'^solvedQuestion$', views.solvedQuestion),

@@ -28,39 +28,86 @@ export default class HeaderButton extends React.Component{
   }
 }
 
-export default class RealHeader extends React.Component{
+export default class HeaderUserPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: PageStore.getState().currentPage,
       isLogin:UserStore.getState().isLogin,
       user_name:UserStore.getState().user_name
     };
-    this.onPageChange = this.onPageChange.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
   }
   componentDidMount() {
-    PageStore.listen(this.onPageChange);
     UserStore.listen(this.onUserChange);
   }
   componentWillUnmount() {
-    UserStore.listen(this.onUserChange);
-    PageStore.unlisten(this.onPageChange);
+    UserStore.unlisten(this.onUserChange);
   }
   onUserChange(state) {
     this.state.isLogin = state.isLogin;
     this.state.user_name = state.user_name;
   }
-  onPageChange(state) {
-    this.state = {active:PageStore.getState().currentPage};
-  }
-  goRegister()
-  {
+  goRegister() {
     JumpPageActions.JumpTo("register");
   }
-  goLogin()
-  {
+  goLogin() {
     JumpPageActions.JumpTo("login");
+  }
+  goLogout() {
+    
+  }
+  render() {
+    if (this.state.isLogin) {
+      return (
+        <div className="right item">
+          <div className="ui two column very relaxed grid">
+            <div className="item">
+              <div className="ui left icon">
+                <i className="user icon"></i>
+                <a>{ this.state.user_name }</a>
+              </div>
+            </div>
+          
+            <div className="column">
+              <button className="ui inverted blue button" onClick={this.goLogout}>logout</button>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="right item">
+          <div className="ui two column very relaxed grid">
+            <div className="column">
+              <button className="ui inverted orange button" onClick={this.goRegister}>register</button>
+            </div>
+            <div className="ui inverted vertical divider"> Or </div>
+            <div className="column">
+              <button className="ui inverted purple button" onClick={this.goLogin}>login</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+}
+
+export default class RealHeader extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: PageStore.getState().currentPage,
+    };
+    this.onPageChange = this.onPageChange.bind(this);
+  }
+  componentDidMount() {
+    PageStore.listen(this.onPageChange);
+  }
+  componentWillUnmount() {
+    PageStore.unlisten(this.onPageChange);
+  }
+  onPageChange(state) {
+    this.state = {active:PageStore.getState().currentPage};
   }
   render() {
     return (
@@ -78,17 +125,7 @@ export default class RealHeader extends React.Component{
           Robot
         </HeaderButton>
         
-        <div className="right item">
-          <div className="ui two column very relaxed grid">
-            <div className="column">
-              <button className="ui inverted orange button" onClick={this.goRegister}>register</button>
-            </div>
-            <div className="ui inverted vertical divider"> Or </div>
-            <div className="column">
-              <button className="ui inverted purple button" onClick={this.goLogin}>login</button>
-            </div>
-          </div>
-        </div>
+        <HeaderUserPanel/>
       </div>
     );
   }

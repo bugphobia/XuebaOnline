@@ -29,12 +29,13 @@ class UserStore {
 
     handleError(err) {
         this.state.state = "failed";
-        this.state.errors = response.errors;
+        this.state.errors = [err];
     }
 
     handleRegisterResponse(response) {
         if (response.state == "ok") {
             this.state.state = "ok";
+            this.state.errors = [];
             UserActions.Login.defer({
                 username:this.state.user_name,
                 password:this.state.password,
@@ -43,7 +44,11 @@ class UserStore {
             this.state.password = "";
         } else {
             this.state.state = "failed";
-            this.state.errors = response.errors;
+            if (typeof(response.errors) != 'undefined') {
+                this.state.errors = response.errors;
+            } else {
+                this.state.errors = ["unknown error!"];
+            }
         }
     }
 
@@ -77,10 +82,14 @@ class UserStore {
         } else {
             this.state.state = "failed";
             this.state.isLogin = false;
-            this.state.errors = response.errors;
+            if (typeof(response.errors) != 'undefined') {
+                this.state.errors = response.errors;
+            } else {
+                this.state.errors = ["unknown error!"];
+            }
         }
     }
-    
+
     handleLogin(info) {
         this.state.state = "loading";
         this.state.user_name=info.username;
