@@ -9,6 +9,7 @@ import FeedBack from './components/feedback'
 import PageStore from './stores/PageStore'
 import WindowStore from './stores/WindowStore'
 import ResizeActions from './actions/ResizeActions'
+import UserActions from './actions/UserAction'
 
 window.jQuery = window.$ = require('./jquery.js');
 var s = require('./semantic.js');

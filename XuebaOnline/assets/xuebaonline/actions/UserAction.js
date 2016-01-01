@@ -16,6 +16,18 @@ class UserActions {
     ReceiveError(err) {
         this.dispatch(err);
     }
+    GetUserInfo() {
+        this.dispatch();
+    }
+    ReceiveUserInfo(response) {
+        this.dispatch(response);
+    }
+    Logout() {
+        this.dispatch();
+    }
+    ReceiveLogout(response) {
+        this.dispatch(response);
+    }
 }
 
 module.exports = alt.createActions(UserActions);

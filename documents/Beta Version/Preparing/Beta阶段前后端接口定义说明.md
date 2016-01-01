@@ -15,6 +15,18 @@
 **经查，Android的HttpClient会自动管理Cookies，这一点请再行确认一下。**  
 **Django是靠cookies来确定用户状态的。**
 
+## 修改记录 ##
+### 2016-1-1 ###
+1. 增加logined_required语义描述。
+2. 获取用户信息接口新增了一些字段，用于网页端保持登陆状态。
+
+## 补充说明 ##
+### login_required ###
+若已经登陆，则一切功能如文档所述。若未登陆，则会返回
+`{'state':'failed','errors':['Login Required']}`。
+在具体代码中，login_required采用Python装饰器实现，主要用于处理
+有些服务需要用户登陆后才能请求的情况。如果用户未登陆，则直接返回错误。
+
 ## 用户管理 ##
 ### 用户登陆 ###
 + URL: /accounts/login
@@ -51,13 +63,60 @@
 + Return:
   - 成功时  
 	{"state":"ok",
+	 "username":"USERNAME",
 	 "email":"example@example.com",
 	 "creation_time":UNIXTimestamp,
 	 "realname":"example_real_name",
 	 "description":"I'm a example",
 	 "credit":123,
 	 "forgottime":UNIXTimestamp,
-	 "download":123}
+	 "download":123,
+	 "tags": [
+        {
+          "tagname":"name1",
+          "count": 123,
+          "excerpt": "name1 is a balabala..."
+        }，
+        {
+          "tagname":"name2",
+          "count": 222,
+          "excerpt": "name2 is a balabala..."
+        },
+        ...
+      ],
+      "questions": [
+        {
+          "question_id":123,
+          "title": "my question is a balabala...",
+          "content": "hi,..."
+          "uid": "user id" //提问者id
+          "uname": "user name"//提问者姓名
+          "shortAns": "answer is balabala"//问题的简短回答（如果已被选中“最佳答案”）
+          "views": 123 //访问数
+          "replies": 1 //回复数
+          "solved": true //是否已采纳“最佳答案
+          "PostDateTime": UNIXTimestamp//提出问题的时间
+        },
+        ...
+      ],
+      "answers": [
+        {
+          "question_id":123,
+          "answer_id":111,
+          "count": 123,
+          "content": "hi,...",
+          "uid": 66666666,
+          "uname": "answer's name",
+          "title": "answer title",
+          "Qtitle": //该回答所属问题的标题，用于显示“用户回答过的问题”时
+          "views": 222,
+          "votes": 123,
+          "PostDateTime": UNIXTimestamp, //回答问题的时间
+          "IsBestAns": true//判断该answer是否是所属问题的最佳answer
+        },
+        ...
+      ]
+	 }
   - 失败时
 	{"state":"failed"} 
 + Addtion Explanaions:

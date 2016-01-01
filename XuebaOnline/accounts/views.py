@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django import forms
 
 from django.contrib.auth import authenticate, login, logout, get_user
-from django.contrib.auth.decorators import login_required
+from .utils import login_required
 
 from .models import UserProfile
 from stackExchange.models import Tag
@@ -270,13 +270,17 @@ def userinfo(request):
     user = get_user(request)
     profile = user.userprofile
     return JsonResponse({'state': 'ok',
-                         'user':user,
-                         'profile':profile,
-                         'saved_tags':profile.saved_tags.all(),
-                         'saved_tags_count':profile.saved_tags.count(),
-                         'questions_count':profile.questions.count(),
-                         'answers_count':profile.questions.count(),
-                         'created_days':(datetime.date.today()-profile.creation_date).days})
+                         'username':user.username,
+                         'email':user.email,
+                         'creation_time':profile.creation_date,
+                         'realname':user.first_name+' '+user.last_name,
+                         'description':profile.description,
+                         'credit':profile.credit,
+                         'forgottime':profile.forgettime,
+                         'download':profile.download,
+                         'tags':list(profile.saved_tags.all()),
+                         'questions':list(profile.questions.all()),
+                         'answers':list(profile.answers.all())})
 
 
 

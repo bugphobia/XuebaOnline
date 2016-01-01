@@ -16,3 +16,5 @@ class UserProfile(models.Model):
     answers = models.ManyToManyField(Answer)
     credit = models.IntegerField(default=0)
     download = models.IntegerField(default=0)
+    description = models.CharField(null = True, blank = True,max_length = 256)
+    forgettime = models.DateTimeField()

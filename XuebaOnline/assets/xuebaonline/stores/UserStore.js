@@ -2,6 +2,8 @@ import alt from '../alt';
 import UserActions from '../actions/UserAction';
 import JumpPageActions from '../actions/JumpPageActions';
 
+window.jQuery = window.$ = require('../jquery.js');
+
 class UserStore {
     constructor() {
         this.state = {
@@ -23,13 +25,68 @@ class UserStore {
             handleLogin: UserActions.LOGIN,
             handleRegisterResponse: UserActions.RECEIVE_REGISTER_RESPONSE,
             handleLoginResponse: UserActions.RECEIVE_LOGIN_RESPONSE,
-            handleError: UserActions.RECEIVE_ERROR
+            handleError: UserActions.RECEIVE_ERROR,
+            handleGetUserInfo: UserActions.GET_USER_INFO,
+            handleReceiveUserInfo: UserActions.RECEIVE_USER_INFO,
+            handleLogout: UserActions.LOGOUT,
+            handleReceiveLogout: UserActions.RECEIVE_LOGOUT
         });
+    }
+
+    handleReceiveLogout(response) {
+        if (response.state == "ok") {
+            this.state.isLogin = false;
+        }
     }
 
     handleError(err) {
         this.state.state = "failed";
         this.state.errors = [err];
+    }
+
+    handleLogout() {
+        $.ajax({
+            url: '/accounts/logout/',
+            dataType: 'json',
+            cache: false,
+            type:"GET",
+            success:function(response){
+                UserActions.ReceiveLogout(response);
+            },
+            error: function(xhr, status, err) {
+                // nothing to do
+            }
+        });
+    }
+
+    handleGetUserInfo() {
+        $.ajax({
+            url: '/accounts/userinfo/',
+            dataType: 'json',
+            cache: false,
+            type:"GET",
+            success:function(response){
+                UserActions.ReceiveUserInfo(response);
+            },
+            error: function(xhr, status, err) {
+                // nothing to do
+            }
+        });
+    }
+
+    handleReceiveUserInfo(response) {
+        if (response.state == "ok") {
+            this.state.state = "ok";
+            this.state.user_name = response.username;
+            this.state.email = response.email;
+            this.state.creation_time = response.creation_time;
+            this.state.realname = response.realname;
+            this.state.description = response.description;
+            this.state.credit = response.credit;
+            this.state.forgottime = response.forgottime;
+            this.state.download = response.download;
+            this.state.isLogin = true;
+        }
     }
 
     handleRegisterResponse(response) {

@@ -2,6 +2,7 @@ import React from 'react';
 import "../semantic.css";
 import UserStore from '../stores/UserStore';
 import PageStore from '../stores/PageStore';
+import UserActions from '../actions/UserAction';
 import JumpPageActions from '../actions/JumpPageActions';
 
 export default class HeaderButton extends React.Component{
@@ -39,6 +40,7 @@ export default class HeaderUserPanel extends React.Component {
   }
   componentDidMount() {
     UserStore.listen(this.onUserChange);
+    UserActions.GetUserInfo();
   }
   componentWillUnmount() {
     UserStore.unlisten(this.onUserChange);
@@ -46,6 +48,7 @@ export default class HeaderUserPanel extends React.Component {
   onUserChange(state) {
     this.state.isLogin = state.isLogin;
     this.state.user_name = state.user_name;
+    this.forceUpdate();
   }
   goRegister() {
     JumpPageActions.JumpTo("register");
@@ -54,7 +57,7 @@ export default class HeaderUserPanel extends React.Component {
     JumpPageActions.JumpTo("login");
   }
   goLogout() {
-    
+    UserActions.Logout();
   }
   render() {
     if (this.state.isLogin) {
