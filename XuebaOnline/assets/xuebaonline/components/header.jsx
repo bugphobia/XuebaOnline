@@ -40,7 +40,7 @@ export default class HeaderUserPanel extends React.Component {
   }
   componentDidMount() {
     UserStore.listen(this.onUserChange);
-    UserActions.GetUserInfo();
+    UserActions.GetUserInfo.defer();
   }
   componentWillUnmount() {
     UserStore.unlisten(this.onUserChange);
@@ -59,13 +59,16 @@ export default class HeaderUserPanel extends React.Component {
   goLogout() {
     UserActions.Logout();
   }
+  goUserCenter() {
+    JumpPageActions.JumpTo("usercenter");
+  }
   render() {
     if (this.state.isLogin) {
       return (
         <div className="right item">
           <div className="ui two column very relaxed grid">
             <div className="item">
-              <div className="ui left icon">
+              <div className="ui left icon" onClick={this.goUserCenter}>
                 <i className="user icon"></i>
                 <a>{ this.state.user_name }</a>
               </div>

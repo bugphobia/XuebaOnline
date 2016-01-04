@@ -84,28 +84,22 @@ def dislike_tag(request):
 # If the state is ok:
 # Front end can get more infomation about the user's saved tags
 # The attributes can see below  
-@login_required
 def get_tags(request):
-    startPos = request.session['tagStartPos']
-    step = 2
-    if 'requiredTagCount' in request.POST:
-        step = int(request.POST['requiredTagCount'])
-    print(startPos)
-    print(step)
-    tags = Tag.objects.all()[startPos:startPos+step]
-    request.session['tagStartPos'] = startPos + step
-    request.session['tagLastStartPos'] = startPos
-    user = get_user(request)
-    profile = user.userprofile
+    pageNum = 0
+    try:
+        pageNum = int(request.GET['pageNum'])
+    except:
+        pageNum = 0
+    tags = Tag.objects.order_by('-count')[pageNum*10:pageNum*10+10]
+    resTags = list()
+    for tag in tags:
+        resTags.append({
+            'tagname':tag.name,
+            'count':tag.count,
+            'excerpt':tag.excerpt
+        })
     return JsonResponse({'state': 'ok',
-                         'user':user,
-                         'profile':profile,
-                         'tags':tags,
-                         'saved_tags':profile.saved_tags.all(),
-                         'saved_tags_count':profile.saved_tags.count(),
-                         'questions_count':profile.questions.count(),
-                         'answers_count':profile.questions.count(),
-                         'created_days':(datetime.date.today()-profile.creation_date).days})
+                         'tags':resTags})
 
 # This function used for getting some setted informations
 @login_required

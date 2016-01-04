@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Index from './components/index'
 import Tuned from './components/tuned'
+import UserCenter from './components/usercenter'
 import FootMenu from './components/footmenu'
 import Register from './components/register'
 import Login from './components/login'
@@ -62,6 +63,13 @@ export default class App extends React.Component {
       return (
         <div>
           <FeedBack/>
+          <FootMenu/>
+        </div>
+      );
+    } else if (this.state.currentPage == 'usercenter') {
+      return (
+        <div>
+          <UserCenter/>
           <FootMenu/>
         </div>
       );

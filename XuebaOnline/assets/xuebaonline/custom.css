@@ -1,0 +1,30 @@
+@media screen and (min-width: 700px) {
+  .column .p.animated:before {
+    position: relative;
+    left: 0;
+    content: "> ";
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .column .p.animated:after {
+    position: relative;
+    left: 0;
+    content: " <";
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .taglistitem:hover .p.animated:before {
+    left: -10px;
+    opacity: 1;
+  }
+  .taglistitem:hover .p.animated:after {
+    left: 10px;
+    opacity: 1;
+  }
+}
