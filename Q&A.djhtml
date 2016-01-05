@@ -1,0 +1,283 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <!--Just load for location-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">Robot</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="ui grid">
+      <div class="row">
+        <div class="four wide column"></div>
+        <div class="two wide column">
+          <div class="content">
+            <img class="left floated tiny ui image" src="{% static 'SearchLogo.jpg' %}">
+          </div>
+        </div>
+        <div class="five wide column">
+          <div class="ui vertical segment">
+            <div class="ui fluid search">
+              <div class="ui icon fluid input">
+                <input class="prompt" placeholder="Search..." type="text">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="five wide middle aligned column">
+          <button class="ui blue basic button">
+            <i class="icon tag"></i>
+            Search
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column"></div>
+        <div class="eight wide column">
+          <div class="row">
+            <a class="ui label">
+              Related Tags
+            </a>
+          </div>
+
+          <div class="row">
+            <div class="ui container" height="200">
+              {% for related_tag in related_tags %}
+                <div class="row">
+                  <div class="two wide column">
+                    <div class="row">
+                      <div class="ui label">
+                        {% tag_first %}
+                      </div>
+                    </div>
+                    <div class="one wide column"></div>
+                    <div class="five wide column">
+                      <div class="ui label">
+                        {% desdcription1 %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% end for %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui right floated segment">
+              <button class="ui button">
+                Newest
+              </button>
+              <button class="ui button">
+                Hightest voted
+              </button>
+              <button class="ui button">
+                Unanswered
+              </button>
+            </div>
+          </div>
+
+          <!-- Questions -->
+          <div class="row">
+            <div class="ui items">
+              {% for answer in answers %}
+                <div class="one column row">
+                  <div class="column">
+                    <div class="ui container">
+                      <div class="ui segment">
+                        <div class="ui two column stackable grid">
+                          <div class="four wide center aligned middle aligned column">
+                            <div class="ui three equal width grid">
+                              <div class="column">
+                                <div class="ui item">
+                                  <div class="content">
+                                  <h4 class="ui header">1 <div class="sub header">votes</div> </h4>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="blue column">
+                                <div class="ui item">
+                                  <div class="content">
+                                  <h4 class="ui header">4 <div class="sub header">replys</div> </h4>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="column">
+                                <div class="ui item">
+                                  <div class="content">
+                                  <h4 class="ui header">17 <div class="sub header">views</div> </h4>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="twelve wide column">
+                            <div class="row">
+                              <h4 class="ui header">
+                                <i class="announcement icon"></i>
+                                <a class="content" href=http://stackoverflow.com/questions/33692749>Clone all last columns dropdown javascript on button click</a>
+                              </h4>
+                            </div>
+                            <div class="row">        
+                                <a class="ui tag label" href="/search/query/?query_content=javascript"> javascript </a>
+                                <a class="ui tag label" href="/search/query/?query_content=jquery"> jquery </a>
+                                <a class="ui tag label" href="/search/query/?query_content=html"> html </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% end for%}
+            </div>
+          </div>
+          <div class="row">
+            <div class="left floated container">
+              {% for i in page_numbers %}
+                <button class="ui small basic icon buttons">
+                  {% i %}
+                </button>
+              {% end for %}
+            </div>
+            <div class="right floated container">
+              <button class="ui button">
+                上一页
+              </button>
+              <button class="ui button">
+                下一页
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="five wide column">
+          <div class="row">
+            <button class="ui button">
+              Ask Question
+            </button>
+          </div>
+          <div class="row">
+            <button class="ui button">
+              Upload Search
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ui blue segment">
+            <div class="ui container">
+              <div class="row">
+                <div class="ui label">
+                  <font color="blue"><b>%d</b></font>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui divided items">
+              {% for question in questions %}
+                <div class="item">
+                  {% question %}
+                </div>
+              {% end for%}
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui center aligned segment">
+              <h2>Favorite</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui label">
+              tag_first
+            </div>
+            <div class="ui label">
+              number1
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui label">
+              tag_second
+            </div>
+            <div class="ui label">
+              number2
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui center aligned segment">
+              <h2>Recommend</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui container">
+              <div class="row">
+                <img class="ui small image" src={% image path %}></img>
+                <div class="ui label">
+                  Question title
+                </div>
+              </div>
+              <div class="row">
+                <div class="ui segment">
+                  {% Contents %}
+                </div>
+              </div>
+              <div class="row">
+                <button clas="ui button">
+                  Answer
+                </button>
+                <button clas="ui button">
+                  Follow
+                </button>
+                <button clas="ui button">
+                  Full-Screen
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="one wide column"></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  {% include 'footmenu.djhtml' %}
+
+{% endblock %}

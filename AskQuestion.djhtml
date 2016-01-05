@@ -1,0 +1,189 @@
+{% extends "base.djhtml" %}
+
+{% block title %} Accounts Home {% endblock %}
+
+{% block body %}
+
+  {% if user %}
+    <div>
+    {% include "post_signin_header.djhtml" %}
+  </div>
+  {% else %}
+    <div>
+    {% include "pre_signin_header.djhtml" %}
+    </div>
+  {% endif %}
+
+  {% load staticfiles %}
+
+  <div class="pushter">
+
+    <!--These Code Should be deleted and be exchanged with css-->
+    <!--Top Menu Different from Fixed-->
+    <!--Just load for location-->
+    <div class="ui stackable inverted menu">
+      <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Course</a>
+        <a class="item">Questions</a>
+        <a class="item">Robot</a>
+        
+        <div class="right item">
+          <div class="ui two column very relaxed grid">
+            <div class="column">
+              <button class="ui inverted orange button">register</button>
+            </div>
+            <div class="ui inverted vertical divider"> Or </div>
+            <div class="column">
+              <button class="ui inverted purple button">login</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="ui grid">
+      <div class="row">
+        <div class="four wide column"></div>
+        <div class="two wide column">
+          <div class="content">
+            <img class="left floated tiny ui image" src="{% static 'SearchLogo.jpg' %}">
+          </div>
+        </div>
+        <div class="five wide column">
+          <div class="ui vertical segment">
+            <div class="ui fluid search">
+              <div class="ui icon fluid input" style="margin-left: 1em; margin-right: 1em;">
+                <input class="prompt" placeholder="Search..." type="text">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="five wide middle aligned column">
+          <button class="ui blue basic button">
+            <i class="icon tag"></i>
+            Search
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column"></div>
+        <div class="eight wide column">
+          <div class="ui blue segment">
+            <div class="row">
+              <div class="ui container">
+                <div class="row">
+                  <div class="ui label">Title</div>
+                  <div class="ui input">
+                    <input type="text" placeholder="Input the title of question">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <textarea rows="6" placeholder="Input details of such question"></textaera>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="ui label">Tags</div>
+                  <div class="ui input">
+                    <input type="text" placeholder="Input the title of question">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <button class="ui left floated button">Publish</button>
+                <button class="ui center floated button">Edit</button>
+                <button class="ui right floated button">Cancel</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui label">Similar Questions Recommended</div>
+          </div>
+          <div class="row">
+            <div class="ui segment">
+              <div class="item">
+                <div class="one column row">
+                  <div class="column">
+                    <div class="ui container">
+                      <div class="ui segment">
+                        <div class="ui two column stackable grid">
+                          <div class="four wide center aligned middle aligned column">
+                            <div class="ui three equal width grid">
+                              <div class="column">
+                                <div class="ui item">
+                                  <div class="content">
+                                  <h4 class="ui header">1 <div class="sub header">votes</div> </h4>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="blue column">
+                                <div class="ui item">
+                                  <div class="content">
+                                  <h4 class="ui header">4 <div class="sub header">replys</div> </h4>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="column">
+                                <div class="ui item">
+                                  <div class="content">
+                                  <h4 class="ui header">17 <div class="sub header">views</div> </h4>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="twelve wide column">
+                            <div class="row">
+                              <h4 class="ui header">
+                                <i class="announcement icon"></i>
+                                <a class="content" href=http://stackoverflow.com/questions/33692749>Clone all last columns dropdown javascript on button click</a>
+                              </h4>
+                            </div>
+                            <div class="row">        
+                                <a class="ui tag label" href="/search/query/?query_content=javascript"> javascript </a>
+                                <a class="ui tag label" href="/search/query/?query_content=jquery"> jquery </a>
+                                <a class="ui tag label" href="/search/query/?query_content=html"> html </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="five wide column">
+          <div class="ui blue segment">
+            <div class="row">
+              <div class="ui label">
+                How to Ask Questions
+              </div>
+            </div>
+            <div class="row">
+              <div class="ui segment">
+                <h5>
+                  suggestion1
+                  suggestion2
+                  ......
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="one wide column"></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  {% include 'footmenu.djhtml' %}
+
+{% endblock %}
