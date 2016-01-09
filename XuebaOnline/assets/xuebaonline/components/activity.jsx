@@ -6,6 +6,10 @@ import JumpPageActions from '../actions/JumpPageActions'
 import Question from './question'
 import TagStore from '../stores/TagStore'
 import TagActions from '../actions/TagActions'
+import UserCenterStore from '../stores/UserCenterStore'
+import UserCenterActions from '../actions/UserCenterActions'
+import TagPageButtons from './tagpagebuttons'
+import TagCard from './tagcard'
 
 var inlineStyle = {
   paddingTop:'2 px'
@@ -17,9 +21,11 @@ export default class ChooseTags extends React.Component {
     this.state = {
       state:TagStore.getState().state,
       tags:TagStore.getState().tags,
+      favorite_tags:UserStore.getState().favorite_tags,
       pageNum:0
     };
     this.onTagChange = this.onTagChange.bind(this);
+    this.onUserChange = this.onUserChange.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.lastPage = this.lastPage.bind(this);
   }
@@ -29,12 +35,21 @@ export default class ChooseTags extends React.Component {
     this.state.tags=state.tags;
     this.forceUpdate();
   }
+  onUserChange(state) {
+    this.state.favorite_tags=state.favorite_tags;
+    this.forceUpdate();
+  }
   componentDidMount() {
+    UserStore.listen(this.onUserChange);
     TagStore.listen(this.onTagChange);
     TagActions.Fetch.defer(this.state.pageNum);
   }
   componentWillUnmount() {
     TagStore.unlisten(this.onTagChange);
+    UserStore.unlisten(this.onUserChange);
+  }
+  back() {
+    UserCenterActions.ActivityJumpTo("main");
   }
   nextPage() {
     this.state.pageNum++;
@@ -48,104 +63,79 @@ export default class ChooseTags extends React.Component {
   }
   render() {
     var cards = [];
-    var i;
+    var i,j;
     for (i = 0; i < this.state.tags.length; i++) {
+      var k = false;
+      for (j = 0; j < this.state.favorite_tags.length; j++) {
+        if (this.state.tags[i].tagname == this.state.favorite_tags[j].tagname) {
+          k = true;
+          break;
+        }
+      }
       cards.push(
-        <div className="card" key={i}>
-          <div className="content">
-            <img className="right floated mini ui image" src={require("./SearchLogo.jpg")}/>
-            <div className="header">
-              {this.state.tags[i].tagname}
-            </div>
-            <div className="description">
-              {this.state.tags[i].excerpt}
-            </div>
-          </div>
-          <div className="extra content">
-            <div className="ui labeled button" tabIndex="0">
-              <button className="ui red button">
-                <i className="heart icon"></i>
-                Like
-              </button>
-              <a className="ui basic red left pointing label">
-                {this.state.tags[i].count}
-              </a>
-            </div>
-            <div className="ui labeled button">
-              <div className="ui basic blue button">
-                <i className="fork icon"></i>
-                Details
-              </div>
-            </div>
-          </div>
-        </div>
+        <TagCard like={k} tag={this.state.tags[i]} />
       );
     }
     return (
       <div>
-        {cards}
+        <div className="ui grid">
+          <div className="one wide column">
+            <div className="ui icon basic button" onClick={this.back}>
+              <i className="arrow left icon"></i>
+            </div>
+          </div>
+          <div className="nine wide column">
+            <h1 className="header">
+              Top tags
+            </h1>
+          </div>
+          <div className="six wide column">
+            <TagPageButtons nextPage={this.nextPage} lastPage={this.lastPage}/>
+          </div>
+        </div>
+        <div className="ui very relaxed divided list">
+          {cards}
+        </div>
       </div>
     );
   }
 }
 
-export default class Activity extends React.Component {
+export default class ActivityMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      favorite_tags:TagStore.getState().favorite_tags,
+      favorite_tags:UserStore.getState().favorite_tags,
     };
     this.onUserChange = this.onUserChange.bind(this);
-    this.onTagChange = this.onTagChange.bind(this);
-  }
-  onTagChange(state) {
-    //console.log(state);
-    this.state.state=state.state;
-    this.state.tags=state.tags;
-    this.forceUpdate();
   }
   onUserChange(state) {
-    this.state.favorite_tags = state.tags;
+    this.state.favorite_tags = state.favorite_tags;
+    this.forceUpdate();
   }
   componentDidMount() {
     UserStore.listen(this.onUserChange);
-    TagStore.listen(this.onTagChange);
-    TagActions.Fetch.defer(this.state.pageNum);
   }
   componentWillUnmount() {
-    TagStore.unlisten(this.onTagChange);
     UserStore.unlisten(this.onUserChange);
+  }
+  onAddNew() {
+    UserCenterActions.ActivityJumpTo("chooseTags");
   }
   render() {
     var cards = [];
     var i;
-    for (i = 0; i < this.state.tags.length; i++) {
+    for (i = 0; i < this.state.favorite_tags.length; i++) {
       cards.push(
-        <div className="card" key={i}>
+        <TagCard like={true} tag={this.state.favorite_tags[i]} />
+      );
+    }
+    if (cards.length == 0) {
+      cards.push(
+        <div className="card">
           <div className="content">
-            <img className="right floated mini ui image" src={require("./SearchLogo.jpg")}/>
-            <div className="header">
-              {this.state.tags[i].tagname}
-            </div>
             <div className="description">
-              {this.state.tags[i].excerpt}
-            </div>
-          </div>
-          <div className="extra content">
-            <div className="ui labeled button" tabIndex="0">
-              <button className="ui red button">
-                <i className="heart icon"></i>
-                Like
-              </button>
-              <a className="ui basic red left pointing label">
-                {this.state.tags[i].count}
-              </a>
-            </div>
-            <div className="ui labeled button">
-              <div className="ui basic blue button">
-                <i className="fork icon"></i>
-                Details
-              </div>
+              <strong> No favorite tags !</strong>
             </div>
           </div>
         </div>
@@ -156,9 +146,15 @@ export default class Activity extends React.Component {
         <div className="row">
           <h3 className="ui header" style={inlineStyle}>
             <i className="tags icon"></i>
-            <div className="content">My Tags</div>
+            <div className="content">
+              My Tags
+              <div className="ui clear icon button" onClick={this.onAddNew}>
+                <i className="add icon"></i>
+                Add
+              </div>
+            </div>
           </h3>
-          <div className="ui cards">
+          <div className="ui very relaxed divided list">
             {cards}
           </div>
         </div>
@@ -193,5 +189,32 @@ export default class Activity extends React.Component {
         </div>
       </div>
     );
+  }
+}
+
+export default class Activity extends React.Component
+{
+  constructor(props) {
+    super(props);
+    this.state = {
+      page:UserCenterStore.getState().activityPage
+    };
+    this.onUserCenterChange = this.onUserCenterChange.bind(this);
+  }
+  componentDidMount() {
+    UserCenterStore.listen(this.onUserCenterChange);
+  }
+  componentWillUnmount() {
+    UserCenterStore.unlisten(this.onUserCenterChange);
+  }
+  onUserCenterChange(state) {
+    this.state.page = state.activityPage;
+  }
+  render() {
+    if (this.state.page == "main") {
+      return (<ActivityMain/>);
+    } else if (this.state.page = "chooseTags"){
+      return (<ChooseTags/>);
+    }
   }
 }

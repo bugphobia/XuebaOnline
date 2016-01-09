@@ -6,6 +6,8 @@ import json
 from django.contrib.auth.models import User
 from django import forms
 
+from django.db import transaction
+
 from django.contrib.auth import authenticate, login, logout, get_user
 from .utils import login_required
 
@@ -39,25 +41,16 @@ def convertTagsForResponse(tags):
 def like_tag(request):
     user = get_user(request)
     profile = user.userprofile
-    tags = Tag.objects.all()[request.session['tagLastStartPos']:request.session['tagStartPos']]
-    if 'tag_name' in request.GET:
-        print(request.GET['tag_name'])
+    if 'tag' in request.GET:
+        print(request.GET['tag'])
         try:
-            tag = Tag.objects.get(name=request.GET['tag_name'])
+            tag = Tag.objects.get(name=request.GET['tag'])
             profile.saved_tags.add(tag)
             profile.save()
         except:
-            JsonResponse({'state':'failed'})
-            pass
+            return JsonResponse({'state':'failed','errors':['No such tag']})
     return JsonResponse({'state': 'ok',
-                         'user':user,
-                         'profile':profile,
-                         'tags':tags,
-                         'saved_tags':profile.saved_tags.all(),
-                         'saved_tags_count':profile.saved_tags.count(),
-                         'questions_count':profile.questions.count(),
-                         'answers_count':profile.questions.count(),
-                         'created_days':(datetime.date.today()-profile.creation_date).days})
+                         'tags':convertTagsForResponse(profile.saved_tags.all())})
 
 # This functions used for user's cancel follew to a tag
 # The return state: 'ok' or 'failed'
@@ -68,25 +61,16 @@ def like_tag(request):
 def dislike_tag(request):
     user = get_user(request)
     profile = user.userprofile
-    tags = Tag.objects.all()[request.session['tagLastStartPos']:request.session['tagStartPos']]
-    if 'tag_name' in request.GET:
-        print(request.GET['tag_name'])
+    if 'tag' in request.GET:
+        print(request.GET['tag'])
         try:
-            tag = Tag.objects.get(name=request.GET['tag_name'])
+            tag = Tag.objects.get(name=request.GET['tag'])
             profile.saved_tags.remove(tag)
             profile.save()
         except:
             JsonResponse({'state':'failed'})
-            pass
     return JsonResponse({'state': 'ok',
-                         'user':user,
-                         'profile':profile,
-                         'tags':tags,
-                         'saved_tags':profile.saved_tags.all(),
-                         'saved_tags_count':profile.saved_tags.count(),
-                         'questions_count':profile.questions.count(),
-                         'answers_count':profile.questions.count(),
-                         'created_days':(datetime.date.today()-profile.creation_date).days})
+                         'tags':convertTagsForResponse(profile.saved_tags.all())})
 
 # This functions used for getting tags
 # The return state: 'ok' or 'failed'
@@ -157,7 +141,8 @@ def home(request):
 # The error infomation
 #       Through 'errors', front end can get the error info. 
 # Warming!
-# Compared with the alpha version, we don't have redirect logic here. 
+# Compared with the alpha version, we don't have redirect logic here.
+@transaction.atomic
 def signup(request):
     if request.method == 'POST':
         errors = list()

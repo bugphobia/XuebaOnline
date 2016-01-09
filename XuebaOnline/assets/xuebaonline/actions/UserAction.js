@@ -28,6 +28,18 @@ class UserActions {
     ReceiveLogout(response) {
         this.dispatch(response);
     }
+    likeTag(tagName) {
+        this.dispatch(tagName);
+    }
+    ReceiveLikeTag(response) {
+        this.dispatch(response);
+    }
+    dislikeTag(tagName) {
+        this.dispatch(tagName);
+    }
+    ReceiveDislikeTag(response) {
+        this.dispatch(response);
+    }
 }
 
 module.exports = alt.createActions(UserActions);

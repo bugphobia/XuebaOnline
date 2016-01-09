@@ -5,6 +5,7 @@ import TagStore from '../stores/TagStore'
 import TagActions from '../actions/TagActions'
 import "../semantic.css"
 import '../custom.css'
+import TagPageButtons from './tagpagebuttons'
 
 export default class TagList extends React.Component {
   constructor(props) {
@@ -14,9 +15,19 @@ export default class TagList extends React.Component {
       tags:TagStore.getState().tags,
       pageNum:0
     };
-    this.onTagChange = this.onTagChange.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.lastPage = this.lastPage.bind(this);
+    this.onTagChange = this.onTagChange.bind(this);
+  }
+  nextPage() {
+    this.state.pageNum++;
+    TagActions.Fetch.defer(this.state.pageNum);
+  }
+  lastPage() {
+    if (this.state.pageNum > 0) {
+      this.state.pageNum--;
+    }
+    TagActions.Fetch.defer(this.state.pageNum);
   }
   onTagChange(state) {
     //console.log(state);
@@ -30,16 +41,6 @@ export default class TagList extends React.Component {
   }
   componentWillUnmount() {
     TagStore.unlisten(this.onTagChange);
-  }
-  nextPage() {
-    this.state.pageNum++;
-    TagActions.Fetch.defer(this.state.pageNum);
-  }
-  lastPage() {
-    if (this.state.pageNum > 0) {
-      this.state.pageNum--;
-    }
-    TagActions.Fetch.defer(this.state.pageNum);
   }
   render() {
     if (this.state.state == 'loading') {
@@ -69,21 +70,7 @@ export default class TagList extends React.Component {
           <div className="ui one column padded grid">
             {tagsList}
             <div className="column">
-              <div className="ui buttons fluid">
-                <div className="ui animated button" onClick={this.lastPage}>
-                  <div className="visible content">Former</div>
-                  <div className="hidden content">
-                    <i className="left arrow icon"></i>
-                  </div>
-                </div>
-                <div className="or"></div>
-                <div className="ui animated button" onClick={this.nextPage}>
-                  <div className="visible content">Latter</div>
-                  <div className="hidden content">
-                    <i className="right arrow icon"></i>
-                  </div>
-                </div>
-              </div>
+              <TagPageButtons nextPage={this.nextPage} lastPage={this.lastPage}/>
             </div>
           </div>
         </div>

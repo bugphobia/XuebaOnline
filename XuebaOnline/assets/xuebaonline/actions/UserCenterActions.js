@@ -13,6 +13,9 @@ class UserCenterActions {
     Confirm(newProfile) {
         this.dispatch(newProfile);
     }
+    ActivityJumpTo(pageName) {
+        this.dispatch(pageName);
+    }
 }
 
 module.exports = alt.createActions(UserCenterActions);

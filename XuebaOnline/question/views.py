@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
-from .models import Question, Tag, Answer, Vote
+from .models import XBQuestion, XBTag, XBAnswer, XBVote
 from .datamanager import *
 
 from django.contrib.auth.decorators import login_required

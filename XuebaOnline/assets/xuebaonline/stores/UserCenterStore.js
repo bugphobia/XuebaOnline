@@ -6,17 +6,23 @@ class UserCenterStore {
     constructor() {
         this.state = {
             currentTab:"activity",
-            editState:false
+            editState:false,
+            activityPage:"main"
         };
 
         this.bindListeners({
             handleJumpTo: UserCenterActions.JUMP_TO,
             handleEdit: UserCenterActions.EDIT,
             handleConfirm: UserCenterActions.CONFIRM,
-            handleCancel: UserCenterActions.CANCEL
+            handleCancel: UserCenterActions.CANCEL,
+            handleActivityJumpTo: UserCenterActions.ACTIVITY_JUMP_TO
         });
     }
 
+    handleActivityJumpTo(pageName) {
+        this.state.activityPage = pageName;
+    }
+    
     handleJumpTo(pageName) {
         this.state.currentTab = pageName;
     }

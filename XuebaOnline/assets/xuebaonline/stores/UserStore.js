@@ -30,8 +30,56 @@ class UserStore {
             handleGetUserInfo: UserActions.GET_USER_INFO,
             handleReceiveUserInfo: UserActions.RECEIVE_USER_INFO,
             handleLogout: UserActions.LOGOUT,
-            handleReceiveLogout: UserActions.RECEIVE_LOGOUT
+            handleReceiveLogout: UserActions.RECEIVE_LOGOUT,
+            handleLikeTag: UserActions.LIKE_TAG,
+            handleReceiveLikeTag: UserActions.RECEIVE_LIKE_TAG,
+            handleDislikeTag: UserActions.DISLIKE_TAG,
+            handleReceiveDislikeTag: UserActions.RECEIVE_DISLIKE_TAG
         });
+    }
+
+    handleLikeTag(tagName) {
+        $.ajax({
+            url: '/accounts/liketag/',
+            dataType: 'json',
+            cache: false,
+            data:{tag:tagName},
+            type:"GET",
+            success:function(response){
+                UserActions.ReceiveLikeTag(response);
+            },
+            error: function(xhr, status, err) {
+                UserActions.ReceiveError(err);
+            }
+        });
+    }
+
+    handleReceiveLikeTag(response) {
+        if (response.state == "ok") {
+            this.state.favorite_tags = response.tags;
+        }
+    }
+
+    handleDislikeTag(tagName) {
+        $.ajax({
+            url: '/accounts/disliketag/',
+            dataType: 'json',
+            cache: false,
+            data:{tag:tagName},
+            type:"GET",
+            success:function(response){
+                UserActions.ReceiveDislikeTag(response);
+            },
+            error: function(xhr, status, err) {
+                UserActions.ReceiveError(err);
+            }
+        });
+    }
+
+    handleReceiveDislikeTag(response) {
+        if (response.state == "ok") {
+            this.state.favorite_tags = response.tags;
+        }
     }
 
     handleReceiveLogout(response) {
@@ -86,6 +134,7 @@ class UserStore {
             this.state.credit = response.credit;
             this.state.forgottime = response.forgottime;
             this.state.download = response.download;
+            this.state.favorite_tags = response.tags;
             this.state.isLogin = true;
         }
     }
