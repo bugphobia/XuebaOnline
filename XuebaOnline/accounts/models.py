@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from stackExchange.models import Tag,Question,Answer
-
+from django.utils import timezone
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -17,4 +17,4 @@ class UserProfile(models.Model):
     credit = models.IntegerField(default=0)
     download = models.IntegerField(default=0)
     description = models.CharField(null = True, blank = True,max_length = 256)
-    forgettime = models.DateTimeField()
+    forgettime = models.DateTimeField(default=timezone.now)
