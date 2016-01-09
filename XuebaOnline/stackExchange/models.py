@@ -30,5 +30,3 @@ class Answer(models.Model):
 class CrawlProcess(models.Model):
     type_name = models.CharField(max_length = 256)
     page = models.IntegerField()
-
-    
