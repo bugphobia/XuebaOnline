@@ -124,7 +124,7 @@ export default class RealHeader extends React.Component{
         <HeaderButton active={this.state.active=="course"} link='course'>
           Course
         </HeaderButton>
-        <HeaderButton active={this.state.active=="questions"} link='index'>
+        <HeaderButton active={this.state.active=="questions"} link='questions'>
           Questions 
         </HeaderButton>
         <HeaderButton active={this.state.active=="robot"} link='robot'>

@@ -7,6 +7,8 @@ from .datamanager import *
 from accounts.utils import login_required
 from django.utils import timezone
 
+from django.contrib.auth import get_user
+
 def getUnsolvedQuestions(request):
     if 'tag' in request.GET and 'pageNum' in request.GET:
         tag_name = request.GET['tag']
@@ -166,7 +168,8 @@ def addQuestion(request):
         tags = get_tags_by_name(tagnames)
         question = XBQuestion(uid=user, title=title, content=content)
         question.save()
-        question.tags.add(tags)
+        for tag in tags:
+            question.tags.add(tag)
         return JsonResponse({'state':'ok'})
     else:
         return JsonResponse({'state':'failed'})

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Index from './components/index'
+import Questions from './components/questions'
 import Tuned from './components/tuned'
 import UserCenter from './components/usercenter'
 import FootMenu from './components/footmenu'
@@ -56,6 +57,13 @@ export default class App extends React.Component {
       return (
         <div>
           <Login/>
+          <FootMenu/>
+        </div>
+      );
+    } else if (this.state.currentPage == 'questions') {
+      return (
+        <div>
+          <Questions/>
           <FootMenu/>
         </div>
       );

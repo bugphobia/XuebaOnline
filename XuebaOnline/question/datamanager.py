@@ -34,6 +34,13 @@ def get_question_by_id(questionid):
 def get_tags_by_name(tagnames):
     tags = []
     for tagname in tagnames:
-        tag = XBTag.objects.filter(name = tagname)
+        tag = None
+        try:
+            tag = XBTag.objects.get(name = tagname)
+        except:
+            tag = XBTag(name = tagname,
+                        count = 0,
+                        excerpt = "")
+            tag.save()
         tags.append(tag)
     return tags
