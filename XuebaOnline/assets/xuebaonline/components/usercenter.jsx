@@ -2,8 +2,9 @@ import React from 'react'
 import Header from './header'
 import "../semantic.css"
 import UserStore from '../stores/UserStore'
-import PageStore from '../stores/PageStore'
+import UserCenterStore from '../stores/UserCenterStore'
 import JumpPageActions from '../actions/JumpPageActions'
+import UserCenterActions from '../actions/UserCenterActions'
 import Activity from './activity'
 import Settings from './settings'
 
@@ -16,13 +17,13 @@ export default class UserCenter extends React.Component {
       email:UserStore.getState().email,
       credit:UserStore.getState().credit,
       realname:UserStore.getState().realname,
-      currentTab:PageStore.getState().currentUserCenterTab
+      currentTab:UserCenterStore.getState().currentTab
     };
-    this.onPageChange = this.onPageChange.bind(this);
+    this.onUserCenterStoreChange = this.onUserCenterStoreChange.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
   }
-  onPageChange() {
-    this.state.currentTab = PageStore.getState().currentUserCenterTab;
+  onUserCenterStoreChange() {
+    this.state.currentTab = UserCenterStore.getState().currentTab;
     this.forceUpdate();
   }
   onUserChange() {
@@ -36,21 +37,21 @@ export default class UserCenter extends React.Component {
     }
   }
   goActivity() {
-    JumpPageActions.UserCenterJumpTo.defer('activity');
+    UserCenterActions.JumpTo.defer('activity');
   }
   goProfile() {
-    JumpPageActions.UserCenterJumpTo.defer('profile');
+    UserCenterActions.JumpTo.defer('profile');
   }
   goSettings() {
-    JumpPageActions.UserCenterJumpTo.defer('settings');
+    UserCenterActions.JumpTo.defer('settings');
   }
   componentDidMount() {
-    PageStore.listen(this.onPageChange);
+    UserCenterStore.listen(this.onUserCenterStoreChange);
     UserStore.listen(this.onUserChange);
   }
   componentWillUnmount() {
     UserStore.unlisten(this.onUserChange);
-    PageStore.unlisten(this.onPageChange);
+    UserCenterStore.unlisten(this.onUserCenterStoreChange);
   }
   render() {
     if (!this.state.isLogin) {

@@ -20,6 +20,15 @@ class ProfileForm(forms.Form):
     email = forms.EmailField(required=False)
     birthday = forms.DateField(required=False,input_formats=['%Y/%m/%d'])
 
+def convertTagsForResponse(tags):
+    resTags = list()
+    for tag in tags:
+        resTags.append({
+            'tagname':tag.name,
+            'count':tag.count,
+            'excerpt':tag.excerpt
+        })
+    return resTags
 
 # This functions used for user's adding follew to a tag
 # The return state: 'ok' or 'failed'
@@ -91,15 +100,9 @@ def get_tags(request):
     except:
         pageNum = 0
     tags = Tag.objects.order_by('-count')[pageNum*10:pageNum*10+10]
-    resTags = list()
-    for tag in tags:
-        resTags.append({
-            'tagname':tag.name,
-            'count':tag.count,
-            'excerpt':tag.excerpt
-        })
+    
     return JsonResponse({'state': 'ok',
-                         'tags':resTags})
+                         'tags':convertTagsForResponse(tags)})
 
 # This function used for getting some setted informations
 @login_required
@@ -236,24 +239,24 @@ def logout_view(request):
 # The setting information is disharmony between database and interface, may have error.
 @login_required
 def updateprofile(request):
-    if request.method == 'POST':
-        email = ""
-        realname = ""
-        description = ""
-        try:
-            email = request.POST['email']
-            realname = request.POST['realname']
-            description = request.POST['description']
-        except:
-            pass
-        user = get_user(request)
-        profile = user.userprofile
-        user.email = email
-        user.first_name = realname
-        user.save()
-        profile.display = description
-        profile.save();
-        return JsonResponse({'state':'ok'})
+    email = None
+    realname = None
+    description = None
+    if 'email' in request.GET:
+        email = request.GET['email']
+    if 'realname' in request.GET:
+        realname = request.GET['realname']
+    if 'description' in request.GET:
+        description = request.GET['description']
+
+    user = get_user(request)
+    profile = user.userprofile
+    user.email = email if email != None else user.email
+    user.first_name = realname if realname != None else user.first_name
+    user.save()
+    profile.description = description if description != None else profile.display
+    profile.save();
+    return JsonResponse({'state':'ok'})
 
 
 # This function is for getting infomation about the user
@@ -272,7 +275,7 @@ def userinfo(request):
                          'credit':profile.credit,
                          'forgottime':profile.forgettime,
                          'download':profile.download,
-                         'tags':list(profile.saved_tags.all()),
+                         'tags':convertTagsForResponse(profile.saved_tags.all()),
                          'questions':list(profile.questions.all()),
                          'answers':list(profile.answers.all())})
 

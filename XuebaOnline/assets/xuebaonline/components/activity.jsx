@@ -11,7 +11,7 @@ var inlineStyle = {
   paddingTop:'2 px'
 };
 
-export default class Activity extends React.Component {
+export default class ChooseTags extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ export default class Activity extends React.Component {
       tags:TagStore.getState().tags,
       pageNum:0
     };
-    this.onUserChange = this.onUserChange.bind(this);
+    this.onTagChange = this.onTagChange.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.lastPage = this.lastPage.bind(this);
   }
@@ -29,16 +29,12 @@ export default class Activity extends React.Component {
     this.state.tags=state.tags;
     this.forceUpdate();
   }
-  onUserChange() {
-  }
   componentDidMount() {
-    UserStore.listen(this.onUserChange);
     TagStore.listen(this.onTagChange);
     TagActions.Fetch.defer(this.state.pageNum);
   }
   componentWillUnmount() {
     TagStore.unlisten(this.onTagChange);
-    UserStore.unlisten(this.onUserChange);
   }
   nextPage() {
     this.state.pageNum++;
@@ -55,7 +51,7 @@ export default class Activity extends React.Component {
     var i;
     for (i = 0; i < this.state.tags.length; i++) {
       cards.push(
-        <div className="card">
+        <div className="card" key={i}>
           <div className="content">
             <img className="right floated mini ui image" src={require("./SearchLogo.jpg")}/>
             <div className="header">
@@ -66,7 +62,7 @@ export default class Activity extends React.Component {
             </div>
           </div>
           <div className="extra content">
-            <div className="ui labeled button" tabindex="0">
+            <div className="ui labeled button" tabIndex="0">
               <button className="ui red button">
                 <i className="heart icon"></i>
                 Like
@@ -75,7 +71,77 @@ export default class Activity extends React.Component {
                 {this.state.tags[i].count}
               </a>
             </div>
-            <div className="ui labeled button" tabindex="0">
+            <div className="ui labeled button">
+              <div className="ui basic blue button">
+                <i className="fork icon"></i>
+                Details
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div>
+        {cards}
+      </div>
+    );
+  }
+}
+
+export default class Activity extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorite_tags:TagStore.getState().favorite_tags,
+    };
+    this.onUserChange = this.onUserChange.bind(this);
+    this.onTagChange = this.onTagChange.bind(this);
+  }
+  onTagChange(state) {
+    //console.log(state);
+    this.state.state=state.state;
+    this.state.tags=state.tags;
+    this.forceUpdate();
+  }
+  onUserChange(state) {
+    this.state.favorite_tags = state.tags;
+  }
+  componentDidMount() {
+    UserStore.listen(this.onUserChange);
+    TagStore.listen(this.onTagChange);
+    TagActions.Fetch.defer(this.state.pageNum);
+  }
+  componentWillUnmount() {
+    TagStore.unlisten(this.onTagChange);
+    UserStore.unlisten(this.onUserChange);
+  }
+  render() {
+    var cards = [];
+    var i;
+    for (i = 0; i < this.state.tags.length; i++) {
+      cards.push(
+        <div className="card" key={i}>
+          <div className="content">
+            <img className="right floated mini ui image" src={require("./SearchLogo.jpg")}/>
+            <div className="header">
+              {this.state.tags[i].tagname}
+            </div>
+            <div className="description">
+              {this.state.tags[i].excerpt}
+            </div>
+          </div>
+          <div className="extra content">
+            <div className="ui labeled button" tabIndex="0">
+              <button className="ui red button">
+                <i className="heart icon"></i>
+                Like
+              </button>
+              <a className="ui basic red left pointing label">
+                {this.state.tags[i].count}
+              </a>
+            </div>
+            <div className="ui labeled button">
               <div className="ui basic blue button">
                 <i className="fork icon"></i>
                 Details

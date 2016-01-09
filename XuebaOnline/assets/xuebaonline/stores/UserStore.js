@@ -18,6 +18,7 @@ class UserStore {
             credit:0,
             forgottime:0,
             download:0,
+            favorite_tags:[],
             errors:[]
         };
         this.bindListeners({
