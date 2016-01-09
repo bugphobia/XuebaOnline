@@ -35,6 +35,7 @@ export default class UserCenter extends React.Component {
     if (!this.state.isLogin) {
       JumpPageActions.JumpTo.defer('login');
     }
+    this.forceUpdate();
   }
   goActivity() {
     UserCenterActions.JumpTo.defer('activity');
