@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'XuebaOnline',
     'accounts',
     'stackExchange',
+    'question',
 )
 
 MIDDLEWARE_CLASSES = (

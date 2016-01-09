@@ -35,12 +35,16 @@ def feedback(request):
     user = get_user(request)
     return render(request, 'feedback.djhtml', {'user': user})
 
+# This func use for search
+# If query_content can't be found in request.GET or the method isn't GET, return {'state':'invalid'}
+# If can't get the tag's id, return {"state":"failed","query_content":""};
+# Else get all the search result
 def query(request):
     if request.method == "GET":
         user = get_user(request)
         cont = {"user": user}        
         if 'query_content' not in request.GET:
-            return redirect(index)
+            return JsonResponse({'state':'invalid'})
         else:
             query_content = request.GET['query_content']
             if get_tag_id(query_content) is True:
@@ -65,13 +69,14 @@ def query(request):
                     que['view_count'] = question.view_count
                     question_list.append(que)
                 cont['question_list'] = question_list
-                return render(request, 'search/result.djhtml', cont)
+                return JsonResponse(cont)
             else:
                 cont['query_content'] = query_content
+                cont['state'] = 'failed'
                 # TODO use solr to search
-                return render(request, 'search/result.djhtml', cont)
+                return JsonResponse(cont)
     else:
-        return redirect(index) 
+        return JsonResponse({'state':'invalid'})
 
 def robot(request):
     user = get_user(request)
