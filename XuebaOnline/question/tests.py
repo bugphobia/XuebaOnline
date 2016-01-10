@@ -176,12 +176,3 @@ class DatabaseTotalTest(TestCase):
         aVote = XBVote.objects.get(aid=theAnswer, uid=theUser)
         self.assertEqual(aVote.up, 0)
         print("In vote-twice-click test---->>>>Success")
-
-class RequestTest(TestCase):
-
-	def setUp(self):
-        self.client = Client()
-        response = self.client.post('/accounts/signup/',{'username':'UnitTestUser','password':'123456','repassword':'123456','email':'123456@gmail.com'})
-        self.assertEqual(response.status_code, 200)
-        response = self.client.post('/accounts/login/',{'username':'UnitTestUser','password':'123456'})
-        self.assertEqual(response.status_code, 200)
