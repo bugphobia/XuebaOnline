@@ -6,6 +6,8 @@ import TagActions from '../actions/TagActions'
 import "../semantic.css"
 import '../custom.css'
 import TagPageButtons from './tagpagebuttons'
+import SearchActions from '../actions/SearchActions'
+import SearchStore from '../stores/SearchStore'
 
 export default class TagList extends React.Component {
   constructor(props) {
@@ -42,6 +44,9 @@ export default class TagList extends React.Component {
   componentWillUnmount() {
     TagStore.unlisten(this.onTagChange);
   }
+  search(queryContent) {
+    SearchActions.Query(queryContent);
+  }
   render() {
     if (this.state.state == 'loading') {
       return (
@@ -58,7 +63,8 @@ export default class TagList extends React.Component {
                        'teal','blue','violet','purple','pink']
       for(i = 0; i < this.state.tags.length; i++) {
         tagsList.push(
-          <div key={this.state.tags[i].tagname} className={colorName[i%colorName.length]+" column taglistitem"}>
+          <div key={this.state.tags[i].tagname} className={colorName[i%colorName.length]+" column taglistitem"}
+               onClick={this.search.bind(this,this.state.tags[i].tagname)}>
             <h3 className="ui center aligned header p animated inverted">
               {this.state.tags[i].tagname}
             </h3>
@@ -91,7 +97,18 @@ export default class TagList extends React.Component {
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      defaultQuery:SearchStore.getState().query_content
+    }
+    this.queryContent = "";
+    this.search = this.search.bind(this);
+    this.onQueryChange = this.onQueryChange.bind(this);
+  }
+  search() {
+    SearchActions.Query(this.queryContent);
+  }
+  onQueryChange(event) {
+    this.queryContent = event.target.value;
   }
   render() {
     return (
@@ -180,21 +197,21 @@ export default class Index extends React.Component {
             </div>
 
             <div className="ui vertical segment">
-              <form className="ui form" action="/search/query/" method="get">
+              <div className="ui form">
                 <div className="ui large fluid search">
                   <div className="ui icon fluid input">
-                    <input className="prompt" placeholder="Search..." type="text" name="query_content"/>
+                    <input className="prompt" placeholder="Search..." type="text" name="query_content" onChange={this.onQueryChange}/>
                     <i className="search icon"></i>
                   </div>
                   <div className="results"></div>
                 </div>
                 <div className="ui vertical segment">
-                  <button className="ui blue basic button submit" type="submit">
+                  <div className="ui blue basic button" onClick={this.search}>
                     <i className="icon tag"></i>
                     Search
-                  </button>
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 

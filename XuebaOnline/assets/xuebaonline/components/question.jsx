@@ -1,22 +1,10 @@
 import React from 'react'
 import Header from './header'
 import "../semantic.css"
-import UserStore from '../stores/UserStore'
 
 export default class Question extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
-    this.onUserChange = this.onUserChange.bind(this);
-  }
-  onUserChange() {
-  }
-  componentDidMount() {
-    UserStore.listen(this.onUserChange);
-  }
-  componentWillUnmount() {
-    UserStore.unlisten(this.onUserChange);
   }
   render() {
     return (
@@ -46,7 +34,9 @@ export default class Question extends React.Component {
                 <div className="column">
                   <div className="ui item">
                     <div className="content">
-                      <h4 className="ui header">117 <div className="sub header">views</div> </h4>
+                      <h4 className="ui header">{typeof(this.props.views)=="undefined"?'17':this.props.views}
+                        <div className="sub header">views</div>
+                      </h4>
                     </div>
                   </div>
                 </div>
@@ -56,7 +46,12 @@ export default class Question extends React.Component {
               <div className="row">
                 <h4 className="ui header">
                   <i className="announcement icon"></i>
-                  <a className="content">How JVM identity regular expression such as @"$teamorl^" in C#'s grammer</a>
+                  <a className="content">
+                    {typeof(this.props.title)=="undefined"?
+                                               "How JVM identity regular expression such as @\"$teamorl^\" in C#'s grammer" :
+                                               this.props.title
+                      }
+                  </a>
                 </h4>
               </div>
               <div className="row">

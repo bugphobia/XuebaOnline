@@ -81,7 +81,6 @@ def feedback(request):
 def query(request):
     if request.method == "GET":
         user = get_user(request)
-        cont = {"user": user}        
         if 'query_content' not in request.GET:
             return JsonResponse({'state':'invalid'})
         else:
@@ -94,6 +93,7 @@ def query(request):
             rsp = eval(responseText.read())
 
             res = rsp['response']
+            cont = dict();
             cont['query_content'] = query_content
             cont['numFound'] = res['numFound']
             question_list = []

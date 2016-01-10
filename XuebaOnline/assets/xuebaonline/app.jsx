@@ -5,6 +5,7 @@ import Questions from './components/questions'
 import Tuned from './components/tuned'
 import UserCenter from './components/usercenter'
 import FootMenu from './components/footmenu'
+import SearchResults from './components/searchresult'
 import Register from './components/register'
 import Login from './components/login'
 import FeedBack from './components/feedback'
@@ -37,6 +38,7 @@ export default class App extends React.Component {
   }
   onChange(state) {
     this.setState(state);
+    this.forceUpdate();
   }
   render() {
     if (this.state.currentPage == "index") {
@@ -64,6 +66,13 @@ export default class App extends React.Component {
       return (
         <div>
           <Questions/>
+          <FootMenu/>
+        </div>
+      );
+    } else if (this.state.currentPage == 'searchresults') {
+      return (
+        <div>
+          <SearchResults/>
           <FootMenu/>
         </div>
       );
