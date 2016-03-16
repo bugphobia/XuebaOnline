@@ -82,12 +82,13 @@ urlpatterns = patterns('',
 Mysite\template\show.html页面添加table内容  
 ```html
 <table>
-	<tr><td>城市</td><td>城市ID</td></tr>
+<tr><td>城市</td><td>城市ID</td></tr>
 {% if getCitysInfo %}
     <tr><td>{{cityname}}</td><td>{{cityid}}</td></tr>
  {% else %}
     <tr><td colspan="2">未找到城市信息</td></tr>
-{% endif %} </table>
+{% endif %}
+</table>
 ```
 mysite目录下修改`view.py`文件`ShowContent`视图函数
 ```python
@@ -112,7 +113,7 @@ Mysite\template\ show.html页面添加table内容
     <p>{{ bsc.city_name }} : {{bsc.bsc_num}}</p>
 {% empty %}
     <p>No bsc infomation </p>
-% endfor %}
+{% endfor %}
 ```
 mysite目录下修改`view.py`文件添加`#coding=utf-8`（支持中文显示），ShowContent视图函数添加`bsc_lists`列表
 ```python
